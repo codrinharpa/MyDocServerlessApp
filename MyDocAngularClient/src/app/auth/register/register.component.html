@@ -1,0 +1,88 @@
+<form [formGroup]="registrationFormGroup" class="register-form"  method="POST" action="#" role="form">
+  <div class="form-group">
+      <h2>Inregistrare</h2>
+  </div>
+  <div *ngIf="errorMessage!=null" class="alert alert-danger">
+      {{ errorMessage }}
+  </div>
+  <div class="form-group row">
+      <label class="control-label col-sm-2 col-form-label" for="signupName">Nume</label>
+      <div class = "col-sm-6">
+        <input id="signupName" type="text" maxlength="50" class="form-control"
+        formControlName="name" [(ngModel)]="registrationUser.name">
+      </div>
+  </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupEmail">Email</label>
+        <div class = "col-sm-6">
+            <input id="signupEmail" type="email" maxlength="50" class="form-control" formControlName="email" [(ngModel)]="registrationUser.email">
+        </div>
+        <div class = "col-sm-4">
+            <p class="text-danger" *ngIf="email.errors?.required && email.touched">Campul email este necesar</p>
+            <p class="text-danger" *ngIf="email.errors?.email && !email.errors.required && email.touched">Adresa de email nu are un format valid </p>
+        </div>
+    </div>
+  <div class="form-group row">
+      <label class="control-label col-sm-2 col-form-label" for="signupPhone">Telefon</label>
+      <div class = "col-sm-6">
+        <input id="signupPhone" type="tel" maxlength="13" class="form-control" formControlName="phone" [(ngModel)]="registrationUser.phone">
+      </div>
+      <div class = "col-sm-4">
+        <p class="text-danger" *ngIf="phone.errors?.required && phone.touched">Campul telefon este necesar</p>
+        <p class="text-danger" *ngIf="phone.errors?.pattern && !phone.errors.required && phone.touched">Numarul de telefon nu are un format valid </p>
+    </div>
+  </div>
+  <div class="form-group row">
+      <label class="control-label col-sm-2 col-form-label" for="signupPracticeType">Tipul Cabinetului</label>
+      <div class = "col-sm-6">
+        <input id="signupPracticeType" type="text" maxlength="256" class="form-control"
+        formControlName="practiceType" [(ngModel)]="registrationUser.practiceType">
+      </div>
+  </div>
+  <div class="form-group row ">
+      <label class="control-label col-sm-2 col-form-label " for="signupDescription">Descriere</label>
+      <div class = "col-sm-6">
+        <textarea id="signupDescription" maxlength="256" class="form-control"formControlName="description" [(ngModel)]="registrationUser.description">
+        </textarea>
+      </div>
+      
+  </div>
+<div class="form-group">
+    <app-map (latLngChanged)="receiveLatLng($event)">
+
+    </app-map>
+</div>
+  <div [formGroup]="passwordFormGroup">
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupPassword">Parola</label>
+        <div class = "col-sm-6">
+            <input id="signupPassword" type="password" maxlength="25" class="form-control"
+            placeholder="at least 8 characters" length="40" formControlName="password" [(ngModel)]="registrationUser.password">
+        </div>
+        <div class = "col-sm-4">
+            <p class="text-danger" *ngIf="password.errors?.required && password.touched">Campul parola este necesar</p>
+            <p class="text-danger" *ngIf="password.errors?.minlength && password.touched">Va rugam introduceti o parola de minim 8 caractere </p>
+        </div>
+        
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupPasswordConfirmation">Confirmare Parola</label>
+        <div class = "col-sm-6">
+            <input id="signupPasswordConfirmation" type="password" maxlength="25" class="form-control"
+            placeholder="Confirmarea parolei" length="40" formControlName="passwordConfirmation">
+        </div>
+        <div class = "col-sm-4">
+            <p class="text-danger" *ngIf="passwordConfirmation.errors?.required && passwordConfirmation.touched">Confirmati parola</p>
+            <p class="text-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword && passwordConfirmation.touched">Parolele nu sunt la fel</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <button (click)="onRegister()" id="signupSubmit" type="button" [disabled]="!registrationFormGroup.valid" class="btn btn-info btn-block">
+          Create your account
+      </button>
+  </div>
+  <hr>
+  <p>Already have an account? <a [routerLink]="['/home/login']"> <i class="fa fa-fw fa-lock"></i>Login</a></p>
+</form>
