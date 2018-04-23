@@ -19,6 +19,14 @@ provider:
         - s3:DeleteObject
         - s3:ListObjects
       Resource: "arn:aws:s3:::${self:custom.clinicsPhotosBucket}/*"
+    - Effect: Allow
+      Action:
+        - cognito-idp:AdminCreateUser
+      Resource: arn:aws:cognito-idp:eu-central-1:225908385928:userpool/eu-central-1_IPSHbLWaW
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource: arn:aws:dynamodb:eu-central-1:225908385928:table/DoctorsToClinics
 functions:
   uploadClinicPhotos:
     handler: api/uploadPhotos.handler
@@ -43,6 +51,14 @@ functions:
       - http: 
           path: clinics/photos/{email}
           method: get
+  createDoctor:
+    handler: api/createDoctor.handler
+    memorySize: 256
+    description: Create doctors
+    events:
+      - http: 
+          path: clinics/createDoctor/
+          method: post
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
