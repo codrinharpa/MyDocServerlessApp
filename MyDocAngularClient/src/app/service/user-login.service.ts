@@ -4,6 +4,7 @@ import { CognitoCallback, CognitoUtil, LoggedInCallback } from "./cognito.servic
 import { AuthenticationDetails, CognitoUser, CognitoUserSession } from "amazon-cognito-identity-js";
 import * as AWS from "aws-sdk/global";
 import * as STS from "aws-sdk/clients/sts";
+import { config } from "aws-sdk";
 
 @Injectable()
 export class UserLoginService {
@@ -30,6 +31,7 @@ export class UserLoginService {
             console.log("UserLoginService: Successfully set the AWS credentials");
             callback.cognitoCallback(null, session);
         });
+        console.log(session.getIdToken().getJwtToken());
     }
 
     private onLoginError = (callback: CognitoCallback, err) => {
@@ -37,10 +39,7 @@ export class UserLoginService {
     }
 
     constructor(public cognitoUtil: CognitoUtil) {
-        cognitoUtil.setPoolData({
-            UserPoolId: environment.userPoolId,
-            ClientId: environment.clientId
-        })
+        cognitoUtil.setPoolData(environment.clinicsPoolData);
     }
 
     authenticate(username: string, password: string, callback: CognitoCallback) {

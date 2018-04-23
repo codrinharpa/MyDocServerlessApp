@@ -13,7 +13,7 @@ import {CognitoUtil} from "./service/cognito.service";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { SecurehomeComponent } from './secure/securehome/securehome.component';
+import { ClinicSecurehomeComponent } from './clinic/secure/clinicsecurehome/clinicsecurehome.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ConfirmRegistrationComponent } from './auth/confirm-registration/confirm-registration.component';
@@ -36,7 +36,7 @@ import { LogoutComponent } from './auth/logout/logout.component';
     NavbarComponent,
     MapComponent,
     ConfirmRegistrationComponent,
-    SecurehomeComponent,
+    ClinicSecurehomeComponent,
     LoginComponent,
     LogoutComponent
   ],

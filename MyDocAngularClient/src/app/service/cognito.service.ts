@@ -32,10 +32,6 @@ export class CognitoUtil {
 
   public static _REGION = environment.region;
 
-  public static _IDENTITY_POOL_ID = environment.identityPoolId;
-  public static _USER_POOL_ID = environment.userPoolId;
-  public static _CLIENT_ID = environment.clientId;
-
   _POOL_DATA: any;
 
   setPoolData(_POOL_DATA){

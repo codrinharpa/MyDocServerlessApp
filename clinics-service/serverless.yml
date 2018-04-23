@@ -28,6 +28,28 @@ provider:
         - dynamodb:PutItem
       Resource: arn:aws:dynamodb:eu-central-1:225908385928:table/DoctorsToClinics
 functions:
+  #auth
+  registerClinic:
+    handler: api/auth/register.handler
+    memorySize: 128
+    description: Registers a clinic
+    events:
+      - http: 
+          path: clinics/auth/register
+          method: post
+  loginClinic:
+    handler: api/auth/login.handler
+    memorySize: 128
+    description: Login a clinic
+    events:
+      - http: 
+          path: clinics/auth/login
+          method: post
+
+
+
+
+  #photos
   uploadClinicPhotos:
     handler: api/uploadPhotos.handler
     memorySize: 128

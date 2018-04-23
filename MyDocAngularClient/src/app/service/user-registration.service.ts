@@ -4,12 +4,13 @@ import {AuthenticationDetails, CognitoUser, CognitoUserAttribute} from "amazon-c
 import {RegistrationUser} from "../auth/register/register.component";
 import {NewPasswordUser} from "../auth/newpassword/newpassword.component";
 import * as AWS from "aws-sdk/global";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserRegistrationService {
 
     constructor(@Inject(CognitoUtil) public cognitoUtil: CognitoUtil) {
-
+        cognitoUtil.setPoolData(environment.clinicsPoolData);
     }
 
     register(user: RegistrationUser, callback: CognitoCallback): void {

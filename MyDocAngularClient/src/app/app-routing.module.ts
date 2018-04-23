@@ -4,7 +4,7 @@ import { RegisterComponent} from './auth/register/register.component'
 import { LoginComponent } from './auth/login/login.component'
 import { ConfirmRegistrationComponent} from './auth/confirm-registration/confirm-registration.component'
 import { HomeComponent} from './home/home.component'
-import { SecurehomeComponent } from './secure/securehome/securehome.component';
+import { ClinicSecurehomeComponent } from './clinic/secure/clinicsecurehome/clinicsecurehome.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path:"securehome",
-    component: SecurehomeComponent
+    component: ClinicSecurehomeComponent
   },
 ];
 
