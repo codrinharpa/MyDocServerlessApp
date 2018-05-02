@@ -1,25 +1,30 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
 
-
-service: pacient
+service: doctors
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
-custom:
-  pacientsProfilePhotosBucket: 'pacients-profile-photos'
 
 provider:
   name: aws
   runtime: nodejs6.10
-  stage: dev
-  region: eu-central-1
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject	
-        - s3:DeleteObject	
-      Resource: "arn:aws:s3:::${self:custom.pacientsProfilePhotosBucket}/*"
+
+# you can overwrite defaults here
+#  stage: dev
+#  region: us-east-1
+
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
@@ -50,43 +55,8 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  pacientSignup:
-    handler: api/signup.handler
-    memorySize: 128
-    description: Pacient signup using cognito
-    events:
-      - http: 
-          path: pacients/signup
-          method: post
-  pacientLogin:
-    handler: api/login.handler
-    memorySize: 256
-    description: Pacient login using cognito
-    events:
-      - http: 
-          path: pacients/login
-          method: post
-  getPacient:
-    handler: api/getById.handler
-    memorySize: 128
-    description: Get Pacient profile
-    events:
-      - http: 
-          path: pacients
-          method: get
-  pacientPhotoUpload:
-    handler: api/photo.handler
-    memorySize: 128
-    description: Pacient profile photo upload to s3
-    events:
-      - http: 
-          path: pacients/{id}/profilephoto
-          method: post
-          integration: lambda
-          authorizer:
-            name: clinicsAuthorizer
-            arn: arn:aws:execute-api:eu-central-1:225908385928:d61oep1glg/*/POST/clinics/photos/*
-
+  hello:
+    handler: handler.hello
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

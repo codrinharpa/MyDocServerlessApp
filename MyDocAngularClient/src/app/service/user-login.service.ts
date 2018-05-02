@@ -49,6 +49,7 @@ export class UserLoginService{
             console.log("UserLoginService: Successfully set the AWS credentials");
             callback.cognitoCallback(session,null, session);
         });
+        console.log(session.getIdToken().getJwtToken());
     }
 
     private onLoginError = (callback: CognitoCallback, err) => {
