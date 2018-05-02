@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {UserRegistrationService} from "../../service/user-registration.service";
-import {UserLoginService} from "../../service/user-login.service";
+import {UserLoginService, GroupBasedRedirect} from "../../service/user-login.service";
 import {CognitoCallback} from "../../service/cognito.service";
 
 export class NewPasswordUser {
@@ -21,7 +21,7 @@ export class NewpasswordComponent implements OnInit,CognitoCallback {
     router: Router;
     errorMessage: string;
 
-    constructor(public userRegistration: UserRegistrationService, public userService: UserLoginService, router: Router) {
+    constructor(public groupRedirect:GroupBasedRedirect,public userRegistration: UserRegistrationService, public userService: UserLoginService, router: Router) {
         this.router = router;
         this.onInit();
     }
@@ -33,30 +33,23 @@ export class NewpasswordComponent implements OnInit,CognitoCallback {
 
     ngOnInit() {
         this.errorMessage = null;
-        console.log("Checking if the user is already authenticated. If so, then redirect to the secure site");
-         this.userService.isAuthenticated(this);
     }
 
     onRegister() {
-      console.log(this.registrationUser);
+      console.log(this.userService);
       this.errorMessage = null;
       this.userRegistration.newPassword(this.registrationUser, this);
     }
 
-    cognitoCallback(message: string, result: any) {
+    cognitoCallback(session,message: string, result: any) {
       if (message != null) { //error
           this.errorMessage = message;
           console.log("result: " + this.errorMessage);
       } else { //success
           //move to the next step
           console.log("redirecting");
-          this.router.navigate(['/securehome']);
+          this.groupRedirect.redirect(session);
       }
-    }
-
-    isLoggedIn(message: string, isLoggedIn: boolean) {
-        if (isLoggedIn)
-            this.router.navigate(['/securehome']);
     }
 
 }

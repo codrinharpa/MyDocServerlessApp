@@ -5,6 +5,8 @@ import { CognitoCallback } from "../../service/cognito.service";
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ElementRef,ViewChild } from '@angular/core';
 import { RegistrationValidator } from '../../validators/register.validator';
+import { GroupBasedRedirect } from '../../service/user-login.service';
+import { CognitoUserSession } from 'amazon-cognito-identity-js';
 export class RegistrationUser {
     name: string;
     email: string;
@@ -28,7 +30,7 @@ export class RegisterComponent implements CognitoCallback {
     registrationFormGroup: FormGroup;
     passwordFormGroup: FormGroup;
     
-    constructor(private formBuilder: FormBuilder,public userRegistration: UserRegistrationService, router: Router) {
+    constructor(private groupRedirect:GroupBasedRedirect,private formBuilder: FormBuilder,public userRegistration: UserRegistrationService, router: Router) {
             this.router = router;
             this.onInit();
         }
@@ -61,7 +63,7 @@ export class RegisterComponent implements CognitoCallback {
         this.userRegistration.register(this.registrationUser, this);
     }
 
-    cognitoCallback(message: string, result: any) {
+    cognitoCallback(session:CognitoUserSession,message: string, result: any) {
         if (message != null) { //error
             this.errorMessage = message;
             console.log("result: " + this.errorMessage);

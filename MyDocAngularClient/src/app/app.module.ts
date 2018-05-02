@@ -4,28 +4,32 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpModule} from "@angular/http";
+import {HttpClientModule} from "@angular/common/http";
 import {UserRegistrationService} from "./service/user-registration.service";
 // import {UserParametersService} from "./service/user-parameters.service";
-import {UserLoginService} from "./service/user-login.service";
+import {UserLoginService, GroupBasedRedirect} from "./service/user-login.service";
 import {CognitoUtil} from "./service/cognito.service";
 // import {routing} from "./app.routes";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { SecurehomeComponent } from './secure/securehome/securehome.component';
+import { ClinicsHomeComponent } from './secure/clinics/clinics-home/clinics-home.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ConfirmRegistrationComponent } from './auth/confirm-registration/confirm-registration.component';
 import { NewpasswordComponent } from './auth/newpassword/newpassword.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ClinicsNavbarComponent } from './secure/clinics/clinics-navbar/clinics-navbar.component';
 import { AgmCoreModule,MapsAPILoader } from '@agm/core';
 import { } from '@types/googlemaps';
 import { MapComponent } from './map/map.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
-
+import { ClinicsAppointmentsComponent } from './secure/clinics/clinics-appointments/clinics-appointments.component';
+import { RegisterDoctorComponent } from './auth/register-doctor/register-doctor.component';
+import { ClinicsService } from './service/clinics.service';
+import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/login-change-temporary.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,17 +38,22 @@ import { LogoutComponent } from './auth/logout/logout.component';
     RegisterComponent,
     NewpasswordComponent,
     NavbarComponent,
+    ClinicsNavbarComponent,
     MapComponent,
     ConfirmRegistrationComponent,
-    SecurehomeComponent,
+    ClinicsHomeComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    ClinicsAppointmentsComponent,
+    RegisterDoctorComponent,
+    LoginChangeTemporaryComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyDMTXagwBKP_WjEBQQRPHXT5YhA9MOyEm8",
       libraries: ["places"]
     }),
+    HttpClientModule,
     RouterModule,
     BrowserModule,
     AppRoutingModule,
@@ -54,7 +63,9 @@ import { LogoutComponent } from './auth/logout/logout.component';
   providers: [
     CognitoUtil,
     UserRegistrationService,
-    UserLoginService
+    UserLoginService,
+    ClinicsService,
+    GroupBasedRedirect
   ],
   bootstrap: [AppComponent]
 })

@@ -4,14 +4,33 @@ import { CognitoCallback, CognitoUtil, LoggedInCallback } from "./cognito.servic
 import { AuthenticationDetails, CognitoUser, CognitoUserSession } from "amazon-cognito-identity-js";
 import * as AWS from "aws-sdk/global";
 import * as STS from "aws-sdk/clients/sts";
+import { NewPasswordUser } from "../auth/login-change-temporary/login-change-temporary.component"
+import { Router } from "@angular/router";
 
 @Injectable()
-export class UserLoginService {
+export class GroupBasedRedirect {
+    constructor(public router:Router){
+
+    }
+    redirect(session: CognitoUserSession){
+        var groups = session.getAccessToken()['payload']['cognito:groups'];
+        if( groups.includes('Clinics')){
+            this.router.navigate(['/clinics']);
+        }
+        else if(groups.includes('Doctors')){
+            this.router.navigate(['/doctors']);
+        }
+    }
+}
+
+@Injectable()
+export class UserLoginService{
+    loginDetails:NewPasswordUser;
 
     private onLoginSuccess = (callback: CognitoCallback, session: CognitoUserSession) => {
 
         console.log("In authenticateUser onSuccess callback");
-
+        console.log(session);
         AWS.config.credentials = this.cognitoUtil.buildCognitoCreds(session.getIdToken().getJwtToken());
 
         // So, when CognitoIdentity authenticates a user, it doesn't actually hand us the IdentityID,
@@ -28,19 +47,17 @@ export class UserLoginService {
         let sts = new STS(clientParams);
         sts.getCallerIdentity(function (err, data) {
             console.log("UserLoginService: Successfully set the AWS credentials");
-            callback.cognitoCallback(null, session);
+            callback.cognitoCallback(session,null, session);
         });
     }
 
     private onLoginError = (callback: CognitoCallback, err) => {
-        callback.cognitoCallback(err.message, null);
+        callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),err.message, null);
     }
 
     constructor(public cognitoUtil: CognitoUtil) {
-        cognitoUtil.setPoolData({
-            UserPoolId: environment.userPoolId,
-            ClientId: environment.clientId
-        })
+
+        console.log(cognitoUtil._POOL_DATA);
     }
 
     authenticate(username: string, password: string, callback: CognitoCallback) {
@@ -61,7 +78,7 @@ export class UserLoginService {
         let cognitoUser = new CognitoUser(userData);
         console.log("UserLoginService: config is " + AWS.config);
         cognitoUser.authenticateUser(authenticationDetails, {
-            newPasswordRequired: (userAttributes, requiredAttributes) => callback.cognitoCallback(`User needs to set password.`, null),
+            newPasswordRequired: (userAttributes, requiredAttributes) => callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),`User needs to set password.`, null),
             onSuccess: result => this.onLoginSuccess(callback, result),
             onFailure: err => this.onLoginError(callback, err),
             mfaRequired: (challengeName, challengeParameters) => {
@@ -88,10 +105,10 @@ export class UserLoginService {
 
             },
             onFailure: function (err) {
-                callback.cognitoCallback(err.message, null);
+                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),err.message, null);
             },
             inputVerificationCode() {
-                callback.cognitoCallback(null, null);
+                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),null, null);
             }
         });
     }
@@ -106,10 +123,10 @@ export class UserLoginService {
 
         cognitoUser.confirmPassword(verificationCode, password, {
             onSuccess: function () {
-                callback.cognitoCallback(null, null);
+                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),null, null);
             },
             onFailure: function (err) {
-                callback.cognitoCallback(err.message, null);
+                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),err.message, null);
             }
         });
     }

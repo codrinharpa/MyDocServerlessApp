@@ -1,3 +1,23 @@
 export const environment = {
-  production: true
+  production: false,
+
+  region: 'eu-central-1',
+  clinicsDoctorsPool:{
+    identityPoolId: 'us-east-1:fbe0340f-9ffc-4449-a935-bb6a6661fd53',
+    UserPoolId: "eu-central-1_9xDnzevn7",
+    ClientId: "54ktu9uu99hocaq4daa41kbaur",
+  },
+
+  clinicsServiceEndpoint: "https://8yz2std66h.execute-api.eu-central-1.amazonaws.com/dev/clinics",
+  doctorsServiceEndpoint: "https://8yz2std66h.execute-api.eu-central-1.amazonaws.com/dev/clinics",
+
+  ddbTableName: 'LoginTrail',
+
+  cognito_idp_endpoint: '',
+  cognito_identity_endpoint: '',
+  sts_endpoint: '',
+  dynamodb_endpoint: '',
+  s3_endpoint: ''
+
 };
+

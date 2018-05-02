@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
-import { CognitoUserPool } from "amazon-cognito-identity-js";
+import { CognitoUserPool, CognitoUserSession } from "amazon-cognito-identity-js";
 import * as AWS from "aws-sdk/global";
 import * as awsservice from "aws-sdk/lib/service";
 import * as CognitoIdentity from "aws-sdk/clients/cognitoidentity";
 
 export interface CognitoCallback {
-  cognitoCallback(message: string, result: any): void;
+  cognitoCallback(session:CognitoUserSession,message: string, result: any): void;
 
   handleMFAStep?(challengeName: string, challengeParameters: ChallengeParameters, callback: (confirmationCode: string) => any): void;
 }
@@ -32,14 +32,12 @@ export class CognitoUtil {
 
   public static _REGION = environment.region;
 
-  public static _IDENTITY_POOL_ID = environment.identityPoolId;
-  public static _USER_POOL_ID = environment.userPoolId;
-  public static _CLIENT_ID = environment.clientId;
+  public static _USER_POOL_ID = environment.clinicsDoctorsPool.UserPoolId;
+  public static _CLIENT_ID = environment.clinicsDoctorsPool.ClientId;
 
-  _POOL_DATA: any;
-
-  setPoolData(_POOL_DATA){
-    this._POOL_DATA = _POOL_DATA;
+  _POOL_DATA:any = {
+      UserPoolId: CognitoUtil._USER_POOL_ID,
+      ClientId: CognitoUtil._CLIENT_ID
   }
 
   public cognitoCreds: AWS.CognitoIdentityCredentials;
@@ -53,6 +51,10 @@ export class CognitoUtil {
 
   getCurrentUser() {
       return this.getUserPool().getCurrentUser();
+  }
+
+  getCognitoSession(){
+      return this.getCognitoSession();
   }
 
   // AWS Stores Credentials in many ways, and with TypeScript this means that

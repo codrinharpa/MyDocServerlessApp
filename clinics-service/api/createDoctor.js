@@ -94,6 +94,10 @@ module.exports.handler = (event,contex,callback) =>{
                             console.log("Added item:", JSON.stringify(data, null, 2));
                             callback(null,{
                                 statusCode: 201,
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                    'Access-Control-Allow-Credentials': true,
+                                },
                                 body: JSON.stringify({
                                 message: data
                                 }),
