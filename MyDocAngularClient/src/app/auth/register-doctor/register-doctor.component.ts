@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClinicsService } from '../../service/clinics.service';
+import { UserLoginService } from '../../service/user-login.service';
 
 
 export class RegistrationDoctor {
@@ -8,7 +9,7 @@ export class RegistrationDoctor {
   password: string;
   email: string;
   phone: string;
-  
+  specialization: string;
 }
 
 @Component({
@@ -24,11 +25,11 @@ export class RegisterDoctorComponent implements OnInit {
   }
   onRegister(){
       var doctor:RegistrationDoctor = new RegistrationDoctor();
-      doctor.password = "parolaparola";
       doctor.email = "andrei.harpa.ah@gmail.com";
-      doctor.phone = "+40749230350";
+      doctor.phone = "0749230350";
       doctor.firstname = "Andrei";
       doctor.surname = "Harpa";
+      doctor.specialization = "Dentist" ;
       this.service.createDoctor(doctor);
   }
 

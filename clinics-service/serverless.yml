@@ -6,6 +6,8 @@ service: clinics
 # frameworkVersion: "=X.X.X"
 custom:
   clinicsPhotosBucket: 'clinics-photos'
+plugins:
+  - serverless-offline
 provider:
   name: aws
   runtime: nodejs6.10
@@ -27,6 +29,8 @@ provider:
     - Effect: Allow
       Action:
         - dynamodb:PutItem
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
       Resource: arn:aws:dynamodb:eu-central-1:225908385928:table/*
 functions:
   #auth

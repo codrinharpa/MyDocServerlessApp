@@ -6,12 +6,15 @@
   "dependencies": {
     "amazon-cognito-identity-js": "^2.0.3",
     "aws-sdk": "^2.231.1",
+    "es6-promise": "^4.2.4",
     "joi": "^13.2.0",
     "mysql": "^2.15.0",
     "node-fetch": "^2.1.2",
     "save": "^2.3.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "serverless-offline": "^3.20.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
