@@ -36,17 +36,16 @@ export class LoginChangeTemporaryComponent implements OnInit {
   }
 
   onRegister() {
-    console.log(this.userService);
     this.errorMessage = null;
     this.userRegistration.newPassword(this.registrationUser, this);
   }
 
-  cognitoCallback(session, message: string, result: any) {
+  cognitoCallback(message: string, result: any) {
     if (message != null) { //error
         this.errorMessage = message;
         console.log("result: " + this.errorMessage);
     } else { //success
-      this.groupRedirect.redirect(session);
+      // this.groupRedirect.redirect();
     }
   }
 

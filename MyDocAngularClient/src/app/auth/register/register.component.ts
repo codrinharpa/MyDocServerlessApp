@@ -13,7 +13,9 @@ export class RegistrationUser {
     phone: string;
     password: string;
     practiceType:string;
-    address:string;
+    city:string;
+    latitude:string;
+    longitude:string;
     description:string;
 }
 
@@ -48,22 +50,25 @@ export class RegisterComponent implements CognitoCallback {
             name: ['', Validators.required],
             phone: ['', [Validators.required,Validators.pattern('(0[0-9]{9})')]],
             practiceType: ['', Validators.required],
+            city: ['', Validators.required],
             description: ['', Validators.required],
             email: ['', [Validators.required,Validators.email]],
             passwordFormGroup: this.passwordFormGroup
         });
     }
     receiveLatLng(event){
-        this.registrationUser.address = JSON.stringify(event);
+        this.registrationUser.latitude = event.latitude.toString();
+        this.registrationUser.longitude = event.longitude.toString();
         console.log(this.registrationUser);
     }
 
     onRegister() {
         this.errorMessage = null;
+        console.log(this.registrationUser);
         this.userRegistration.register(this.registrationUser, this);
     }
 
-    cognitoCallback(session:CognitoUserSession,message: string, result: any) {
+    cognitoCallback(message: string, result: any) {
         if (message != null) { //error
             this.errorMessage = message;
             console.log("result: " + this.errorMessage);
@@ -79,6 +84,8 @@ export class RegisterComponent implements CognitoCallback {
     get email() { return this.registrationFormGroup.get('email'); }
 
     get phone() { return this.registrationFormGroup.get('phone');}
+
+    get city() { return this.registrationFormGroup.get('city');}
 
     get password() { return this.passwordFormGroup.get('password'); }
 

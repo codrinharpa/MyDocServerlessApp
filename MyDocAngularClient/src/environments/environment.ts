@@ -8,7 +8,7 @@ export const environment = {
     ClientId: "54ktu9uu99hocaq4daa41kbaur",
   },
 
-  clinicsServiceEndpoint: "https://8yz2std66h.execute-api.eu-central-1.amazonaws.com/dev/clinics",
+  clinicsServiceEndpoint: "https://oogo5xxxm6.execute-api.eu-central-1.amazonaws.com/dev/clinics",
   doctorsServiceEndpoint: "https://8yz2std66h.execute-api.eu-central-1.amazonaws.com/dev/clinics",
 
   ddbTableName: 'LoginTrail',

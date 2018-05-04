@@ -5,8 +5,11 @@
   "main": "index.js",
   "dependencies": {
     "amazon-cognito-identity-js": "^2.0.3",
-    "aws-sdk": "^2.226.1",
-    "joi": "^13.2.0"
+    "aws-sdk": "^2.231.1",
+    "joi": "^13.2.0",
+    "mysql": "^2.15.0",
+    "node-fetch": "^2.1.2",
+    "save": "^2.3.2"
   },
   "devDependencies": {},
   "scripts": {

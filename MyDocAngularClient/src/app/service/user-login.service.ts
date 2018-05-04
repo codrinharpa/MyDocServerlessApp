@@ -47,16 +47,17 @@ export class UserLoginService{
         let sts = new STS(clientParams);
         sts.getCallerIdentity(function (err, data) {
             console.log("UserLoginService: Successfully set the AWS credentials");
-            callback.cognitoCallback(session,null, session);
+            callback.cognitoCallback(null, session);
         });
         console.log(session.getIdToken().getJwtToken());
+        this.groupRedirect.redirect(session);
     }
 
     private onLoginError = (callback: CognitoCallback, err) => {
-        callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),err.message, null);
+        callback.cognitoCallback(err.message, null);
     }
 
-    constructor(public cognitoUtil: CognitoUtil) {
+    constructor(public groupRedirect:GroupBasedRedirect,public router: Router, public cognitoUtil: CognitoUtil) {
 
         console.log(cognitoUtil._POOL_DATA);
     }
@@ -79,7 +80,15 @@ export class UserLoginService{
         let cognitoUser = new CognitoUser(userData);
         console.log("UserLoginService: config is " + AWS.config);
         cognitoUser.authenticateUser(authenticationDetails, {
-            newPasswordRequired: (userAttributes, requiredAttributes) => callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),`User needs to set password.`, null),
+            newPasswordRequired: (userAttributes, requiredAttributes) => {
+                this.loginDetails = {
+                    username: authenticationDetails.getUsername(),
+                    existingPassword: authenticationDetails.getPassword(),
+                    password: null
+                }
+                this.router.navigate(['/home/changeTemporary']);
+                callback.cognitoCallback('User needs to set password.', null)
+            },
             onSuccess: result => this.onLoginSuccess(callback, result),
             onFailure: err => this.onLoginError(callback, err),
             mfaRequired: (challengeName, challengeParameters) => {
@@ -106,10 +115,10 @@ export class UserLoginService{
 
             },
             onFailure: function (err) {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),err.message, null);
+                callback.cognitoCallback(err.message, null);
             },
             inputVerificationCode() {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),null, null);
+                callback.cognitoCallback(null, null);
             }
         });
     }
@@ -124,10 +133,10 @@ export class UserLoginService{
 
         cognitoUser.confirmPassword(verificationCode, password, {
             onSuccess: function () {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),null, null);
+                callback.cognitoCallback(null, null);
             },
             onFailure: function (err) {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),err.message, null);
+                callback.cognitoCallback(err.message, null);
             }
         });
     }
@@ -135,7 +144,6 @@ export class UserLoginService{
     logout() {
         console.log("UserLoginService: Logging out");
         this.cognitoUtil.getCurrentUser().signOut();
-
     }
 
     isAuthenticated(callback: LoggedInCallback) {
@@ -152,9 +160,11 @@ export class UserLoginService{
                 }
                 else {
                     console.log("UserLoginService: Session is " + session.isValid());
+                    this.groupRedirect.redirect(session);
                     callback.isLoggedIn(err, session.isValid());
+                    
                 }
-            });
+            }.bind(this));
         } else {
             console.log("UserLoginService: can't retrieve the current user");
             callback.isLoggedIn("Can't retrieve the CurrentUser", false);

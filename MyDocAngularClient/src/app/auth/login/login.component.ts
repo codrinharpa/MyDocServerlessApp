@@ -38,11 +38,10 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback, OnInit
             return;
         }
         this.errorMessage = null;
-        console.log(this.authType);
         this.userService.authenticate(this.email, this.password, this);
     }
 
-    cognitoCallback(session:CognitoUserSession, message: string, result: any) {
+    cognitoCallback(message: string, result: any) {
         if (message != null) { //error
             this.errorMessage = message;
             console.log("result: " + this.errorMessage);
@@ -51,17 +50,11 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback, OnInit
                 this.router.navigate(['/home/confirmRegistration', this.email]);
             } else if (this.errorMessage === 'User needs to set password.') {
                 console.log("redirecting to set new password");
-                this.userService.loginDetails = {
-                    username: this.email,
-                    existingPassword:this.password,
-                    password:""
-                }
-                this.router.navigate(['/home/changeTemporary']);
+
             }
         } else { //success
             // this.ddb.writeLogEntry("login");
-            console.log(result);
-            this.groupRedirect.redirect(session);
+            console.log("Successfully authentificated "+ result);
         }
     }
 
@@ -69,7 +62,7 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback, OnInit
 
     isLoggedIn(message: string, isLoggedIn: boolean) {
         if (isLoggedIn) {
-            this.router.navigate(['/securehome']);
+            console.log('Already logged in')
         }
     }
 

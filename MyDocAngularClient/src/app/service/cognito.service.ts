@@ -6,7 +6,7 @@ import * as awsservice from "aws-sdk/lib/service";
 import * as CognitoIdentity from "aws-sdk/clients/cognitoidentity";
 
 export interface CognitoCallback {
-  cognitoCallback(session:CognitoUserSession,message: string, result: any): void;
+  cognitoCallback(message: string, result: any): void;
 
   handleMFAStep?(challengeName: string, challengeParameters: ChallengeParameters, callback: (confirmationCode: string) => any): void;
 }
@@ -54,7 +54,13 @@ export class CognitoUtil {
   }
 
   getCognitoSession(){
-      return this.getCognitoSession();
+      setTimeout(function(){
+        console.log('getCognitoSession');
+        console.log(this.getUserPool().getCurrentUser());
+        return this.getCurrentUser().getSession(function(){
+            
+        });
+    }, 2000);
   }
 
   // AWS Stores Credentials in many ways, and with TypeScript this means that

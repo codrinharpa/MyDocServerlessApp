@@ -22,21 +22,23 @@ provider:
     - Effect: Allow
       Action:
         - cognito-idp:AdminCreateUser
-      Resource: arn:aws:cognito-idp:eu-central-1:225908385928:userpool/eu-central-1_IPSHbLWaW
+        - cognito-idp:AdminAddUserToGroup
+      Resource: arn:aws:cognito-idp:eu-central-1:225908385928:userpool/eu-central-1_9xDnzevn7
     - Effect: Allow
       Action:
         - dynamodb:PutItem
-      Resource: arn:aws:dynamodb:eu-central-1:225908385928:table/DoctorsToClinics
+      Resource: arn:aws:dynamodb:eu-central-1:225908385928:table/*
 functions:
   #auth
   registerClinic:
-    handler: api/auth/register.handler
-    memorySize: 128
+    handler: api/register.handler
+    memorySize: 256
     description: Registers a clinic
     events:
       - http: 
-          path: clinics/auth/register
+          path: clinics/register
           method: post
+          cors: true
   loginClinic:
     handler: api/auth/login.handler
     memorySize: 128

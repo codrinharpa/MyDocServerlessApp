@@ -5,50 +5,19 @@ import {AuthenticationDetails, CognitoUser, CognitoUserAttribute} from "amazon-c
 import {RegistrationUser} from "../auth/register/register.component";
 import {NewPasswordUser} from "../auth/newpassword/newpassword.component";
 import * as AWS from "aws-sdk/global";
+import { ClinicsService } from "./clinics.service";
+import { GroupBasedRedirect } from "./user-login.service";
 
 @Injectable()
 export class UserRegistrationService {
-    constructor(public cognitoUtil:CognitoUtil) {
+    constructor(public clinicsService: ClinicsService,public cognitoUtil:CognitoUtil,public groupRedirect:GroupBasedRedirect) {
     }
 
     register(user: RegistrationUser, callback: CognitoCallback): void {
-        console.log("UserRegistrationService: user is " + user);
-
-        let attributeList = [];
-
-        let dataName = {
-            Name: 'name',
-            Value: user.name
-        };
-        let dataPhone = {
-            Name: 'custom:phone',
-            Value: user.phone
-        };
-        let dataPracticeType = {
-            Name: 'custom:practiceType',
-            Value: user.practiceType
-        };
-        let dataDescription = {
-            Name: 'custom:description',
-            Value: user.description
-        };
-        let dataAddress = {
-            Name: 'custom:address',
-            Value: user.address
-        };
-        attributeList.push(new CognitoUserAttribute(dataName));
-        attributeList.push(new CognitoUserAttribute(dataPhone));
-        attributeList.push(new CognitoUserAttribute(dataPracticeType));
-        attributeList.push(new CognitoUserAttribute(dataDescription));
-        attributeList.push(new CognitoUserAttribute(dataAddress));
-
-        this.cognitoUtil.getUserPool().signUp(user.email, user.password, attributeList, null, function (err, result) {
-            if (err) {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(), err.message, null);
-            } else {
-                console.log("UserRegistrationService: registered user is " + result);
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(), null, result);
-            }
+        
+        this.clinicsService.register(user).subscribe((data:any) => {
+            console.log(data);
+            callback.cognitoCallback(null, data.user);
         });
 
     }
@@ -64,9 +33,9 @@ export class UserRegistrationService {
 
         cognitoUser.confirmRegistration(confirmationCode, true, function (err, result) {
             if (err) {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(), err.message, null);
+                callback.cognitoCallback(err.message, null);
             } else {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(), null, result);
+                callback.cognitoCallback(null, result);
             }
         });
     }
@@ -81,9 +50,9 @@ export class UserRegistrationService {
 
         cognitoUser.resendConfirmationCode(function (err, result) {
             if (err) {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(), err.message, null);
+                callback.cognitoCallback(err.message, null);
             } else {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(), null, result);
+                callback.cognitoCallback(null, result);
             }
         });
     }
@@ -116,18 +85,18 @@ export class UserRegistrationService {
                 delete userAttributes.email_verified;
                 cognitoUser.completeNewPasswordChallenge(newPasswordUser.password, requiredAttributes, {
                     onSuccess: function (result) {
-                        callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),null, userAttributes);
+                        callback.cognitoCallback(null, userAttributes);
                     },
                     onFailure: function (err) {
-                        callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),err, null);
+                        callback.cognitoCallback(err, null);
                     }
                 });
             },
             onSuccess: function (result) {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),null, result);
+                callback.cognitoCallback(null, result);
             },
             onFailure: function (err) {
-                callback.cognitoCallback(this.cognitoUtil.getCognitoSession(),err, null);
+                callback.cognitoCallback(err, null);
             }
         });
     }

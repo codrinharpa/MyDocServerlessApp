@@ -33,6 +33,19 @@
     </div>
   </div>
   <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupPhone">Oras</label>
+        <select id="signupCity" class="col-sm-6 select-picker" formControlName="city" [(ngModel)]="registrationUser.city">
+            <option>Iasi</option>
+            <option>Bucurest</option>
+            <option>Cluj</option>
+            <option>Timisoara</option>
+        </select>    
+        <div class = "col-sm-4">
+                <p class="text-danger" *ngIf="city.errors?.required && city.touched">Campul oras este necesar</p>
+                <p class="text-danger" *ngIf="city.errors?.pattern && !city.errors.required && phone.touched">Numarul de telefon nu are un format valid </p>
+        </div>  
+    </div>
+  <div class="form-group row">
       <label class="control-label col-sm-2 col-form-label" for="signupPracticeType">Tipul Cabinetului</label>
       <div class = "col-sm-6">
         <input id="signupPracticeType" type="text" maxlength="256" class="form-control"

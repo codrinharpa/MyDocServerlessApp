@@ -17,7 +17,7 @@ export class ConfirmRegistrationComponent implements OnInit {
     errorMessage: string;
     private sub: any;
 
-    constructor(public groupRedirect:GroupBasedRedirect,public regService: UserRegistrationService, public router: Router, public route: ActivatedRoute) {
+    constructor(public regService: UserRegistrationService, public router: Router, public route: ActivatedRoute) {
     }
 
     ngOnInit() {
@@ -38,14 +38,14 @@ export class ConfirmRegistrationComponent implements OnInit {
         this.regService.confirmRegistration(this.email, this.confirmationCode, this);
     }
 
-    cognitoCallback(session:CognitoUserSession, message: string, result: any) {
+    cognitoCallback(message: string, result: any) {
         if (message != null) { //error
             this.errorMessage = message;
             console.log("message: " + this.errorMessage);
         } else { //success
             //move to the next step
             console.log("Moving to securehome");
-            this.groupRedirect.redirect(session);
+            this.router.navigate(['/home/login']);
         }
     }
 

@@ -3,8 +3,8 @@ const config = require('../config.json');
 const AWS = require('aws-sdk');
 var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 const poolData = {
-  UserPoolId : config.doctorsPoolConfig.UserPoolId,
-  ClientId : config.doctorsPoolConfig.ClientId
+  UserPoolId : config.clinicsDoctorsPool.UserPoolId,
+  ClientId : config.clinicsDoctorsPool.ClientId
 };
 
 AWS.config.update({
@@ -33,6 +33,10 @@ module.exports.handler = (event,contex,callback) =>{
             callback(null,{
               statusCode: 400,
               body: JSON.stringify({
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Credentials': true,
+                },
                 message: err
               }),
             });
@@ -63,7 +67,11 @@ module.exports.handler = (event,contex,callback) =>{
                     callback(null,{
                         statusCode: 400,
                         body: JSON.stringify({
-                          message: err
+                            headers: {
+                                'Access-Control-Allow-Origin': '*',
+                                'Access-Control-Allow-Credentials': true,
+                            },
+                            message: err
                         }),
                     });
                     return;
@@ -87,6 +95,10 @@ module.exports.handler = (event,contex,callback) =>{
                             callback(null,{
                                 statusCode: 400,
                                 body: JSON.stringify({
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                    'Access-Control-Allow-Credentials': true,
+                                },
                                 message: "Ups"
                                 }),
                             });

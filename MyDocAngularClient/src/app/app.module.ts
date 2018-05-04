@@ -29,7 +29,9 @@ import { LogoutComponent } from './auth/logout/logout.component';
 import { ClinicsAppointmentsComponent } from './secure/clinics/clinics-appointments/clinics-appointments.component';
 import { RegisterDoctorComponent } from './auth/register-doctor/register-doctor.component';
 import { ClinicsService } from './service/clinics.service';
-import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/login-change-temporary.component'
+import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/login-change-temporary.component';
+import { DoctorsHomeComponent } from './secure/doctors/doctors-home/doctors-home.component';
+import { DoctorsNavbarComponent } from './secure/doctors/doctors-navbar/doctors-navbar.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,9 @@ import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/log
     LogoutComponent,
     ClinicsAppointmentsComponent,
     RegisterDoctorComponent,
-    LoginChangeTemporaryComponent
+    LoginChangeTemporaryComponent,
+    DoctorsHomeComponent,
+    DoctorsNavbarComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

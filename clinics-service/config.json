@@ -1,6 +1,14 @@
 {
-    "doctorsPoolConfig":{
-        "UserPoolId": "eu-central-1_IPSHbLWaW",
-        "ClientId": "62q4t3vu7b5bb8pf53k2ofikjm"
-        }
+    "clinicsDoctorsPool":{
+        "UserPoolId": "eu-central-1_9xDnzevn7",
+        "ClientId": "54ktu9uu99hocaq4daa41kbaur"
+      },
+    "rdsConfig":{
+        "RDS_HOSTNAME": "mydoc.cud0segnmr3b.eu-central-1.rds.amazonaws.com",
+        "RDS_USERNAME": "myDocRdsMaster",
+        "RDS_PASSWORD": "parolardsparolards",
+        "RDS_PORT": "3306",
+        "RDS_DATABASE": "myDoc"
+
+    }
 }

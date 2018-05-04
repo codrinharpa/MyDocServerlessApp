@@ -11,13 +11,13 @@ export class LogoutComponent implements LoggedInCallback {
 
   constructor(public router: Router,
               public userService: UserLoginService) {
-      this.userService.isAuthenticated(this)
+      this.userService.isAuthenticated(this);
   }
 
   isLoggedIn(message: string, isLoggedIn: boolean) {
       if (isLoggedIn) {
           this.userService.logout();
-         // this.router.navigate(['/home']);
+          // this.router.navigate(['/home']);
       }
 
     //ijo9h6y  this.router.navigate(['/home']);

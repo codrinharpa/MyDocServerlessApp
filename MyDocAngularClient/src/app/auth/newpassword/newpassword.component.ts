@@ -41,14 +41,14 @@ export class NewpasswordComponent implements OnInit,CognitoCallback {
       this.userRegistration.newPassword(this.registrationUser, this);
     }
 
-    cognitoCallback(session,message: string, result: any) {
+    cognitoCallback(message: string, result: any) {
       if (message != null) { //error
           this.errorMessage = message;
           console.log("result: " + this.errorMessage);
       } else { //success
           //move to the next step
           console.log("redirecting");
-          this.groupRedirect.redirect(session);
+        //   this.groupRedirect.redirect(session);
       }
     }
 

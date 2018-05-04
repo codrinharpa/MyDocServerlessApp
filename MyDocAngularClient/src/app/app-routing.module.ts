@@ -10,6 +10,7 @@ import { LogoutComponent } from './auth/logout/logout.component';
 import { ClinicsAppointmentsComponent } from './secure/clinics/clinics-appointments/clinics-appointments.component';
 import { NewPasswordUser, NewpasswordComponent } from './auth/newpassword/newpassword.component';
 import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/login-change-temporary.component';
+import { DoctorsHomeComponent } from './secure/doctors/doctors-home/doctors-home.component';
 
 const routes: Routes = [
   {path: "",redirectTo: "home",pathMatch: 'full'},
@@ -31,6 +32,12 @@ const routes: Routes = [
     children: [
       {path:"createDoctor",component: RegisterDoctorComponent},
       {path:"appointments",component: ClinicsAppointmentsComponent}
+    ]
+  },
+  {
+    path:"doctors",
+    component: DoctorsHomeComponent,
+    children: [
     ]
   },
 ];
