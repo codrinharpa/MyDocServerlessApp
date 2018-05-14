@@ -45,7 +45,7 @@ export class LoginChangeTemporaryComponent implements OnInit {
         this.errorMessage = message;
         console.log("result: " + this.errorMessage);
     } else { //success
-      // this.groupRedirect.redirect();
+      this.router.navigate(['/home/login']);
     }
   }
 

@@ -3,9 +3,10 @@ import { Router } from "@angular/router";
 import { UserLoginService, GroupBasedRedirect } from "../../service/user-login.service";
 import { ChallengeParameters, CognitoCallback, LoggedInCallback } from "../../service/cognito.service";
 import { CognitoUser, CognitoUserSession } from "amazon-cognito-identity-js";
+import { ClinicsService } from "../../service/clinics.service";
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

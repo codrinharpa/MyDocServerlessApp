@@ -25,6 +25,7 @@ provider:
       Action:
         - cognito-idp:AdminCreateUser
         - cognito-idp:AdminAddUserToGroup
+        - cognito-idp:AdminGetUser
       Resource: arn:aws:cognito-idp:eu-central-1:225908385928:userpool/eu-central-1_9xDnzevn7
     - Effect: Allow
       Action:
@@ -43,17 +44,24 @@ functions:
           path: clinics/register
           method: post
           cors: true
-  loginClinic:
-    handler: api/auth/login.handler
+  updateClinic:
+    handler: api/update.handler
     memorySize: 128
-    description: Login a clinic
+    description: Updates a clinic details
     events:
       - http: 
-          path: clinics/auth/login
+          path: clinics/update
           method: post
-
-
-
+          cors: true
+  getClinicDetails:
+    handler: api/getClinicDetails.handler
+    memorySize: 128
+    description: Gets clinic details
+    events:
+      - http: 
+          path: clinics/{email}
+          method: get
+          cors: true
 
   #photos
   uploadClinicPhotos:
@@ -62,7 +70,7 @@ functions:
     description: Clinics photos upload
     events:
       - http: 
-          path: clinics/photos
+          path: clinics/photos/{email}
           method: post
     headers:
               - Content-Type

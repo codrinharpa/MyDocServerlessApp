@@ -1,0 +1,44 @@
+
+service: utils-service
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: eu-central-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:Scan
+      Resource: arn:aws:dynamodb:eu-central-1:225908385928:table/*
+functions:
+  getLocations:
+    handler: api/getLocations.handler
+    memorySize: 128
+    description: Gets locations where my-doc is available
+    events:
+      - http: 
+          path: utils/locations
+          method: get
+          cors: true
+  getPracticeTypes:
+    handler: api/getPracticeTypes.handler
+    memorySize: 128
+    description: Gets practice types
+    events:
+      - http: 
+          path: utils/practiceTypes
+          method: get
+          cors: true
+  getSpecializations:
+    handler: api/getSpecializations.handler
+    memorySize: 128
+    description: Gets specializations of a practice type
+    events:
+      - http: 
+          path: utils/specializations/{practiceType}
+          method: get
+          cors: true

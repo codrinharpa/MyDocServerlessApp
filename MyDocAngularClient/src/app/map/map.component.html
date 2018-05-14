@@ -1,7 +1,7 @@
 <div class="form-group">
-  <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #mapSearch>
+  <input placeholder="Cauta locatie" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #mapSearch>
 </div>
-<agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom"  >
+<agm-map [latitude]="_latitude" [longitude]="_longitude" [zoom]="zoom"  >
   <agm-marker [latitude]="markerLatitude" [longitude]="markerLongitude" [markerDraggable]="true"
   (dragEnd)="onDragEnd($event)"></agm-marker>
 </agm-map>

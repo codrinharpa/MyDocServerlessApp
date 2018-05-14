@@ -5,6 +5,7 @@ import { RegistrationDoctor } from "../auth/register-doctor/register-doctor.comp
 import { RegistrationUser } from '../auth/register/register.component';
 import { UserLoginService } from './user-login.service';
 import { CognitoUtil, Callback } from './cognito.service';
+import { UpdateUser } from '../auth/update/update.component';
 
 const endpoint = environment.clinicsServiceEndpoint;
 const httpOptions = {
@@ -17,9 +18,20 @@ export class ClinicsService {
   constructor(public cognitoUtil:CognitoUtil,private httpClient: HttpClient) {}
  
     // Uses http.get() to load data from a single API endpoint
+    
+    getClincsDetails(clinicsEmail:string){
+      return this.httpClient.get(endpoint + '/' + clinicsEmail);
+    }
+
     register(clinic: RegistrationUser){
       let body = JSON.stringify(clinic);
       let route = '/register';
+      return this.httpClient.post(endpoint + route, body);
+    }
+
+    update(clinic: UpdateUser){
+      let body = JSON.stringify(clinic);
+      let route = '/update';
       return this.httpClient.post(endpoint + route, body);
     }
 

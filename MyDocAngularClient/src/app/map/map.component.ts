@@ -9,8 +9,8 @@ import { AgmCoreModule,MapsAPILoader } from '@agm/core';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-    public latitude: number ;
-    public longitude: number ;
+    private _latitude: number ;
+    private _longitude: number ;
     public markerLatitude: number ;
     public markerLongitude: number ;
     public searchControl: FormControl;
@@ -23,14 +23,25 @@ export class MapComponent implements OnInit {
       private mapsAPILoader: MapsAPILoader,
       private ngZone: NgZone
     ) {}
+
+    @Input('latitude') 
+    set latitude(latitude:string){
+      this._latitude = Number(latitude);
+      this.markerLatitude = this._latitude;
+    }
+    @Input('longitude') 
+    set longitude(longitude:string){
+      this._longitude = Number(longitude);
+      this.markerLongitude = this._longitude;
+    }
     
     ngOnInit() {
       //set google maps defaults
       this.zoom = 12;
-      this.latitude = 45.9432;
-      this.longitude = 24.9668;
-      this.markerLatitude = this.latitude;
-      this.markerLongitude = this.longitude;
+      this._latitude = 45.9432;
+      this._longitude = 24.9668;
+      this.markerLatitude = this._latitude;
+      this.markerLongitude = this._longitude;
       
       //create search FormControl
       this.searchControl = new FormControl();
@@ -54,10 +65,10 @@ export class MapComponent implements OnInit {
             }
             
             //set latitude, longitude and zoom
-            this.latitude = place.geometry.location.lat();
-            this.longitude = place.geometry.location.lng();
-            this.markerLatitude = this.latitude;
-            this.markerLongitude = this.longitude;
+            this._latitude = place.geometry.location.lat();
+            this._longitude = place.geometry.location.lng();
+            this.markerLatitude = this._latitude;
+            this.markerLongitude = this._longitude;
             this.zoom = 18;
           });
         });
@@ -76,8 +87,8 @@ export class MapComponent implements OnInit {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition((position) => {
           console.log('suntem aici');
-          this.latitude = position.coords.latitude;
-          this.longitude = position.coords.longitude;
+          this._latitude = position.coords.latitude;
+          this._longitude = position.coords.longitude;
           this.zoom = 12;
         });
       }

@@ -7,7 +7,8 @@ import {NewPasswordUser} from "../auth/newpassword/newpassword.component";
 import * as AWS from "aws-sdk/global";
 import { ClinicsService } from "./clinics.service";
 import { GroupBasedRedirect } from "./user-login.service";
-
+import { UpdateUser } from "../auth/update/update.component";
+import 'rxjs/add/operator/map'
 @Injectable()
 export class UserRegistrationService {
     constructor(public clinicsService: ClinicsService,public cognitoUtil:CognitoUtil,public groupRedirect:GroupBasedRedirect) {
@@ -16,6 +17,18 @@ export class UserRegistrationService {
     register(user: RegistrationUser, callback: CognitoCallback): void {
         
         this.clinicsService.register(user).subscribe((data:any) => {
+            console.log(data);
+            callback.cognitoCallback(null, data.user);
+        },(err:any)=>{
+            console.log(err);
+            callback.cognitoCallback(err.error.input.message, null);
+        });
+
+    }
+
+    update(user: UpdateUser, callback: CognitoCallback): void {
+        
+        this.clinicsService.update(user).subscribe((data:any) => {
             console.log(data);
             callback.cognitoCallback(null, data.user);
         });
@@ -56,7 +69,7 @@ export class UserRegistrationService {
             }
         });
     }
-
+    
     newPassword(newPasswordUser: NewPasswordUser, callback: CognitoCallback): void {
         console.log(newPasswordUser);
         // Get these details and call

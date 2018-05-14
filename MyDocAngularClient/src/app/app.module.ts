@@ -31,7 +31,12 @@ import { RegisterDoctorComponent } from './auth/register-doctor/register-doctor.
 import { ClinicsService } from './service/clinics.service';
 import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/login-change-temporary.component';
 import { DoctorsHomeComponent } from './secure/doctors/doctors-home/doctors-home.component';
-import { DoctorsNavbarComponent } from './secure/doctors/doctors-navbar/doctors-navbar.component'
+import { DoctorsNavbarComponent } from './secure/doctors/doctors-navbar/doctors-navbar.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { UpdateComponent } from './auth/update/update.component'
+import { ImageUploadModule } from "angular2-image-upload"
+import { UtilsService } from './service/utils.service';
+import { ClinicsMenuComponent } from './secure/clinics/clinics-menu/clinics-menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,12 +55,16 @@ import { DoctorsNavbarComponent } from './secure/doctors/doctors-navbar/doctors-
     RegisterDoctorComponent,
     LoginChangeTemporaryComponent,
     DoctorsHomeComponent,
-    DoctorsNavbarComponent
+    DoctorsNavbarComponent,
+    ForgotPasswordComponent,
+    UpdateComponent,
+    ClinicsMenuComponent
   ],
   imports: [
+    ImageUploadModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyDMTXagwBKP_WjEBQQRPHXT5YhA9MOyEm8",
-      libraries: ["places"]
+       libraries: ["places"]
     }),
     HttpClientModule,
     RouterModule,
@@ -69,7 +78,8 @@ import { DoctorsNavbarComponent } from './secure/doctors/doctors-navbar/doctors-
     UserRegistrationService,
     UserLoginService,
     ClinicsService,
-    GroupBasedRedirect
+    GroupBasedRedirect,
+    UtilsService
   ],
   bootstrap: [AppComponent]
 })

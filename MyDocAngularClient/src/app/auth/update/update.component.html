@@ -1,0 +1,65 @@
+<form [formGroup]="updateFormGroup" class="register-form"  method="POST" action="#" role="form">
+    <div class="form-group">
+        <h2>Inregistrare</h2>
+    </div>
+    <div *ngIf="errorMessage!=null" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupName">Nume</label>
+        <div class = "col-sm-6">
+          <input id="signupName" type="text" maxlength="50" class="form-control"
+          formControlName="name" [(ngModel)]="updateUser.name">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupPhone">Telefon</label>
+        <div class = "col-sm-6">
+          <input id="signupPhone" type="tel" maxlength="13" class="form-control" formControlName="phone" [(ngModel)]="updateUser.phone">
+        </div>
+        <div class = "col-sm-4">
+          <p class="text-danger" *ngIf="phone.errors?.required && phone.touched">Campul telefon este necesar</p>
+          <p class="text-danger" *ngIf="phone.errors?.pattern && !phone.errors.required && phone.touched">Numarul de telefon nu are un format valid </p>
+      </div>
+    </div>
+    <div class="form-group row">
+          <label class="control-label col-sm-2 col-form-label" for="signupPhone">Oras</label>
+          <select id="signupCity" class="col-sm-6 select-picker" formControlName="city" [(ngModel)]="updateUser.city">
+              <option>Iasi</option>
+              <option>Bucurest</option>
+              <option>Cluj</option>
+              <option>Timisoara</option>
+          </select>    
+          <div class = "col-sm-4">
+                  <p class="text-danger" *ngIf="city.errors?.required && city.touched">Campul oras este necesar</p>
+                  <p class="text-danger" *ngIf="city.errors?.pattern && !city.errors.required && phone.touched">Numarul de telefon nu are un format valid </p>
+          </div>  
+      </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupPracticeType">Tipul Cabinetului</label>
+        <div class = "col-sm-6">
+          <input id="signupPracticeType" type="text" maxlength="256" class="form-control"
+          formControlName="practiceType" [(ngModel)]="updateUser.practiceType">
+        </div>
+    </div>
+    <div class="form-group row ">
+        <label class="control-label col-sm-2 col-form-label " for="signupDescription">Descriere</label>
+        <div class = "col-sm-6">
+          <textarea id="signupDescription" maxlength="256" class="form-control"formControlName="description" [(ngModel)]="updateUser.description">
+          </textarea>
+        </div>
+        
+    </div>
+  <div class="form-group">
+      <app-map (latLngChanged)="receiveLatLng($event)">
+  
+      </app-map>
+  </div>
+  
+    <div class="form-group">
+        <button (click)="onUpdate()" id="signupSubmit" type="button" [disabled]="!updateFormGroup.valid" class="btn btn-info btn-block">
+            Confirma detaiile
+        </button>
+    </div>
+  </form>
+  

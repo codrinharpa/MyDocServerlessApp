@@ -92,6 +92,7 @@ module.exports.handler = (event, context, callback) => {
               phone: clinicAttributes.phone,
               name: clinicAttributes.name,
               practiceType: clinicAttributes.practiceType,
+              description: requestBody.description,
               city:clinicAttributes.city,
               latitude: clinicAttributes.latitude,
               longitude: clinicAttributes.longitude

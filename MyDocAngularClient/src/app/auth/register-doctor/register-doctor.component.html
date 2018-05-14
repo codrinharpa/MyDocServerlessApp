@@ -1,10 +1,66 @@
-<form class="register-form"  method="POST" action="#" role="form">
-
-    
+<form [formGroup]="registrationFormGroup" class="register-form"  method="POST" action="#" role="form">
+    <div class="form-group">
+        <h2>Adauga doctor</h2>
+    </div>
+    <div *ngIf="errorMessage!=null" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupFirstname">Prenume</label>
+        <div class = "col-sm-6">
+          <input id="signupFirstname" type="text" maxlength="50" class="form-control"
+          formControlName="firstname" [(ngModel)]="registrationDoctor.firstname">
+        </div>
+        <div class = "col-sm-4">
+                <p class="text-danger" *ngIf="firstname.errors?.required && firstname.touched">Campul prenume este necesar</p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupSurname">Nume</label>
+        <div class = "col-sm-6">
+          <input id="signupSurname" type="text" maxlength="50" class="form-control"
+          formControlName="surname" [(ngModel)]="registrationDoctor.surname">
+        </div>
+        <div class = "col-sm-4">
+                <p class="text-danger" *ngIf="surname.errors?.required && surname.touched">Campul nume este necesar</p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupEmail">Email</label>
+        <div class = "col-sm-6">
+            <input id="signupEmail" type="email" maxlength="50" class="form-control" formControlName="email" [(ngModel)]="registrationDoctor.email">
+        </div>
+        <div class = "col-sm-4">
+            <p class="text-danger" *ngIf="email.errors?.required && email.touched">Campul email este necesar</p>
+            <p class="text-danger" *ngIf="email.errors?.email && !email.errors.required && email.touched">Adresa de email nu are un format valid </p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupPhone">Telefon</label>
+        <div class = "col-sm-6">
+          <input id="signupPhone" type="tel" maxlength="13" class="form-control" formControlName="phone" [(ngModel)]="registrationDoctor.phone">
+        </div>
+        <div class = "col-sm-4">
+          <p class="text-danger" *ngIf="phone.errors?.required && phone.touched">Campul telefon este necesar</p>
+          <p class="text-danger" *ngIf="phone.errors?.pattern && !phone.errors.required && phone.touched">Numarul de telefon nu are un format valid </p>
+      </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2 col-form-label" for="signupSpecialization">Specializare</label>
+        <div class = "col-sm-6">
+            <select id="signupSpecialization" class="custom-select" formControlName="specialization" [(ngModel)]="registrationDoctor.specialization">
+                <option [ngValue]="undefined" disabled  selected> Selectati o specializare </option>
+                <option *ngFor="let specialization of specializations" [ngValue]="specialization" >{{specialization}}</option>
+            </select>    
+        </div>
+        <div class = "col-sm-4">
+                <p class="text-danger" *ngIf="specialization.errors?.required && specialization.touched">Campul specializare este necesar</p>
+        </div>  
+    </div>
   
     <div class="form-group">
-        <button (click)="onRegister()" id="signupSubmit" type="button">
-            Create your account
+        <button (click)="onCreateDoctor()" id="signupSubmit" type="button" [disabled]="!registrationFormGroup.valid" class="btn btn-info btn-block">
+            Adauga doctor
         </button>
     </div>
   </form>

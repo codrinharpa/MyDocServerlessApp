@@ -1,7 +1,12 @@
 <app-clinics-navbar>
 
 </app-clinics-navbar>
-
+<div *ngIf="showSuccessMessage" class = "alert alert-success">
+    {{successMessage}}
+</div>
+<app-clinics-menu>
+    
+</app-clinics-menu>
 <router-outlet>
 
 </router-outlet>

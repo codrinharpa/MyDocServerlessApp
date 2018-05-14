@@ -7,6 +7,7 @@ import { ElementRef,ViewChild } from '@angular/core';
 import { RegistrationValidator } from '../../validators/register.validator';
 import { GroupBasedRedirect } from '../../service/user-login.service';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
+import { UtilsService } from '../../service/utils.service';
 export class RegistrationUser {
     name: string;
     email: string;
@@ -31,12 +32,23 @@ export class RegisterComponent implements CognitoCallback {
     errorMessage: string;
     registrationFormGroup: FormGroup;
     passwordFormGroup: FormGroup;
+    locations: any;
+    types:any;
+    latitude: number
+    longitude: number;
     
-    constructor(private groupRedirect:GroupBasedRedirect,private formBuilder: FormBuilder,public userRegistration: UserRegistrationService, router: Router) {
+    constructor(private groupRedirect:GroupBasedRedirect,private formBuilder: FormBuilder,public userRegistration: UserRegistrationService, public utils: UtilsService, router: Router) {
             this.router = router;
+            this.locations = [];
             this.onInit();
         }
     onInit() {
+        this.utils.getLocations().subscribe(data=>{
+            this.locations = data['locations'];
+        });
+        this.utils.getPracticeTypes().subscribe(datad=>{
+            this.types = datad['practiceTypes'];
+        });
         this.registrationUser = new RegistrationUser();
         this.errorMessage = null;
 
@@ -51,15 +63,27 @@ export class RegisterComponent implements CognitoCallback {
             phone: ['', [Validators.required,Validators.pattern('(0[0-9]{9})')]],
             practiceType: ['', Validators.required],
             city: ['', Validators.required],
-            description: ['', Validators.required],
+            description: ['', ],
             email: ['', [Validators.required,Validators.email]],
-            passwordFormGroup: this.passwordFormGroup
+            passwordFormGroup: this.passwordFormGroup,
+
         });
     }
     receiveLatLng(event){
         this.registrationUser.latitude = event.latitude.toString();
         this.registrationUser.longitude = event.longitude.toString();
         console.log(this.registrationUser);
+    }
+    onLocationChange(changedLocation){
+        changedLocation = changedLocation.split(': ')[1];
+        var foundLocation = this.locations.find(function(location){
+            return location.city == changedLocation;
+        });
+        console.log(foundLocation);
+        this.latitude = foundLocation.latitude;
+        this.longitude = foundLocation.longitude;
+        this.registrationUser.latitude = foundLocation.latitude.toString();
+        this.registrationUser.longitude = foundLocation.longitude.toString();
     }
 
     onRegister() {
@@ -88,6 +112,8 @@ export class RegisterComponent implements CognitoCallback {
     get city() { return this.registrationFormGroup.get('city');}
 
     get password() { return this.passwordFormGroup.get('password'); }
+
+    get practiceTYpe() { return this.registrationFormGroup.get('practiceType'); }
 
     get passwordConfirmation() { return this.passwordFormGroup.get('passwordConfirmation'); }
 

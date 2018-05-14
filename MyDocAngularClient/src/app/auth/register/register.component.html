@@ -33,25 +33,30 @@
     </div>
   </div>
   <div class="form-group row">
-        <label class="control-label col-sm-2 col-form-label" for="signupPhone">Oras</label>
-        <select id="signupCity" class="col-sm-6 select-picker" formControlName="city" [(ngModel)]="registrationUser.city">
-            <option>Iasi</option>
-            <option>Bucurest</option>
-            <option>Cluj</option>
-            <option>Timisoara</option>
-        </select>    
+        <label class="control-label col-sm-2 col-form-label" for="signupCity">Oras</label>
+        <div class = "col-sm-6">
+            <select id="signupCity" class="custom-select" formControlName="city" [(ngModel)]="registrationUser.city" (change)="onLocationChange($event.target.value)">
+                <option [ngValue]="undefined" disabled  selected> Selectati un oras </option>
+                <option *ngFor="let location of locations" [ngValue]="location.city" >{{location.city}}</option>
+            </select>    
+        </div>
         <div class = "col-sm-4">
                 <p class="text-danger" *ngIf="city.errors?.required && city.touched">Campul oras este necesar</p>
-                <p class="text-danger" *ngIf="city.errors?.pattern && !city.errors.required && phone.touched">Numarul de telefon nu are un format valid </p>
         </div>  
     </div>
-  <div class="form-group row">
-      <label class="control-label col-sm-2 col-form-label" for="signupPracticeType">Tipul Cabinetului</label>
-      <div class = "col-sm-6">
-        <input id="signupPracticeType" type="text" maxlength="256" class="form-control"
-        formControlName="practiceType" [(ngModel)]="registrationUser.practiceType">
-      </div>
-  </div>
+    <div class="form-group row">
+            <label class="control-label col-sm-2 col-form-label" for="practiceType">Tipul cabinetului</label>
+            <div class = "col-sm-6">
+                <select id="practiceType" class="custom-select" formControlName="practiceType" [(ngModel)]="registrationUser.practiceType">
+                    <option [ngValue]="undefined" disabled  selected> Tipul cabinetului</option>
+                    <option *ngFor="let type of types" [ngValue]="type" >{{type}}</option>
+                </select>    
+            </div>
+            <div class = "col-sm-4">
+                    <p class="text-danger" *ngIf="city.errors?.required && city.touched">Campul oras este necesar</p>
+            </div>  
+    </div>
+
   <div class="form-group row ">
       <label class="control-label col-sm-2 col-form-label " for="signupDescription">Descriere</label>
       <div class = "col-sm-6">
@@ -61,7 +66,7 @@
       
   </div>
 <div class="form-group">
-    <app-map (latLngChanged)="receiveLatLng($event)">
+    <app-map [latitude]="latitude" [longitude]="longitude" (latLngChanged)="receiveLatLng($event)">
 
     </app-map>
 </div>

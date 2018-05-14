@@ -25,8 +25,11 @@
     "@google/maps": "^0.4.6",
     "@types/googlemaps": "^3.30.8",
     "amazon-cognito-identity-js": "1.29.0",
+    "angular-calendar-scheduler": "0.0.3",
+    "angular2-image-upload": "^1.0.0-rc.1",
     "aws-sdk": "2.67.0",
     "core-js": "^2.4.1",
+    "jquery": "^3.3.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

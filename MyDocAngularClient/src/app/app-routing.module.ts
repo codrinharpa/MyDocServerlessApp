@@ -11,6 +11,8 @@ import { ClinicsAppointmentsComponent } from './secure/clinics/clinics-appointme
 import { NewPasswordUser, NewpasswordComponent } from './auth/newpassword/newpassword.component';
 import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/login-change-temporary.component';
 import { DoctorsHomeComponent } from './secure/doctors/doctors-home/doctors-home.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { UpdateComponent } from './auth/update/update.component';
 
 const routes: Routes = [
   {path: "",redirectTo: "home",pathMatch: 'full'},
@@ -23,6 +25,7 @@ const routes: Routes = [
       {path:'confirmRegistration/:username',component: ConfirmRegistrationComponent},
       {path:'logout',component: LogoutComponent},
       {path:'newPassword',component: NewpasswordComponent},
+      {path:'forgotPassword',component: ForgotPasswordComponent},
       {path:'changeTemporary',component: LoginChangeTemporaryComponent}
     ]
   },
@@ -30,6 +33,7 @@ const routes: Routes = [
     path:"clinics",
     component: ClinicsHomeComponent,
     children: [
+      {path:"updateDetails",component: UpdateComponent},
       {path:"createDoctor",component: RegisterDoctorComponent},
       {path:"appointments",component: ClinicsAppointmentsComponent}
     ]

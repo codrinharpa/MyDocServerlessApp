@@ -6,6 +6,7 @@ import * as AWS from "aws-sdk/global";
 import * as STS from "aws-sdk/clients/sts";
 import { NewPasswordUser } from "../auth/login-change-temporary/login-change-temporary.component"
 import { Router } from "@angular/router";
+import { ClinicsService } from "./clinics.service";
 
 @Injectable()
 export class GroupBasedRedirect {
@@ -49,7 +50,12 @@ export class UserLoginService{
             console.log("UserLoginService: Successfully set the AWS credentials");
             callback.cognitoCallback(null, session);
         });
-        console.log(session.getIdToken().getJwtToken());
+        this.clinicsService.getClincsDetails(session.getIdToken()['payload'].email)
+            .subscribe( (data) => {
+                console.log(data);
+                localStorage.setItem('clinicsDetails', JSON.stringify(data));
+                console.log(localStorage.getItem('clinicsDetails'));
+            });
         this.groupRedirect.redirect(session);
     }
 
@@ -57,7 +63,9 @@ export class UserLoginService{
         callback.cognitoCallback(err.message, null);
     }
 
-    constructor(public groupRedirect:GroupBasedRedirect,public router: Router, public cognitoUtil: CognitoUtil) {
+    constructor(public groupRedirect:GroupBasedRedirect,
+        public router: Router, public cognitoUtil: CognitoUtil, 
+        public clinicsService: ClinicsService) {
 
         console.log(cognitoUtil._POOL_DATA);
     }
@@ -102,7 +110,7 @@ export class UserLoginService{
         });
     }
 
-    forgotPassword(username: string, callback: CognitoCallback) {
+    forgotPassword(username: string, callback) {
         let userData = {
             Username: username,
             Pool: this.cognitoUtil.getUserPool()
@@ -115,15 +123,15 @@ export class UserLoginService{
 
             },
             onFailure: function (err) {
-                callback.cognitoCallback(err.message, null);
+                callback(err.message, null);
             },
             inputVerificationCode() {
-                callback.cognitoCallback(null, null);
+                callback(null, null);
             }
         });
     }
 
-    confirmNewPassword(email: string, verificationCode: string, password: string, callback: CognitoCallback) {
+    confirmNewPassword(email: string, verificationCode: string, password: string, callback) {
         let userData = {
             Username: email,
             Pool: this.cognitoUtil.getUserPool()
@@ -133,10 +141,10 @@ export class UserLoginService{
 
         cognitoUser.confirmPassword(verificationCode, password, {
             onSuccess: function () {
-                callback.cognitoCallback(null, null);
+                callback(null, null);
             },
             onFailure: function (err) {
-                callback.cognitoCallback(err.message, null);
+                callback(err.message, null);
             }
         });
     }
