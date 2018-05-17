@@ -13,22 +13,22 @@ import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/log
 import { DoctorsHomeComponent } from './secure/doctors/doctors-home/doctors-home.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { UpdateComponent } from './auth/update/update.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   {path: "",redirectTo: "home",pathMatch: 'full'},
   {
     path:"home",
     component: HomeComponent,
-    children: [
-      {path:"register",component: RegisterComponent},
-      {path:"login",component: LoginComponent},
-      {path:'confirmRegistration/:username',component: ConfirmRegistrationComponent},
-      {path:'logout',component: LogoutComponent},
-      {path:'newPassword',component: NewpasswordComponent},
-      {path:'forgotPassword',component: ForgotPasswordComponent},
-      {path:'changeTemporary',component: LoginChangeTemporaryComponent}
-    ]
   },
+  {path:"about",component: AboutComponent},
+  {path:"register",component: RegisterComponent},
+  {path:"login",component: LoginComponent},
+  {path:'confirmRegistration/:username',component: ConfirmRegistrationComponent},
+  {path:'logout',component: LogoutComponent},
+  {path:'newPassword',component: NewpasswordComponent},
+  {path:'forgotPassword',component: ForgotPasswordComponent},
+  {path:'changeTemporary',component: LoginChangeTemporaryComponent},
   {
     path:"clinics",
     component: ClinicsHomeComponent,

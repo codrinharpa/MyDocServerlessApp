@@ -1,4 +1,5 @@
 .home-banner{
+    position: absolute;
     background-image: url('assets/img/Doctors@2x-min.png');
     // content: url('../../assets/img/Doctors@2x-min.png'); 
     // background: url('assets/img/checklist-3222079.jpg') fixed; 
@@ -10,17 +11,21 @@
     width:100%;
 }
 .center{
+    margin-top:50px;
     padding: 30px;
     display: block;
     text-align:center;
 }
 h1{
+    font-weight: 100;
     color: #fff;
-    font-size: 3.75rem;
+    font-size: 2.75rem;
     margin-top: 1%;
     margin-bottom: 5px;
 }
 h2{
+    margin-top: 20px;
+    font-weight: 100;
     color: #fff;
-    font-size: 2rem;
+    font-size: 1.85rem;
 }

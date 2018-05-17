@@ -1,3 +1,8 @@
+<app-navbar></app-navbar>
+      
+<div *ngIf="showSuccessMessage" class = "alert alert-success">
+        {{successMessage}}
+</div>
 <form [formGroup]="registrationFormGroup" class="register-form"  method="POST" action="#" role="form">
   <div class="form-group">
       <h2>Inregistrare</h2>
@@ -102,5 +107,5 @@
       </button>
   </div>
   <hr>
-  <p>Already have an account? <a [routerLink]="['/home/login']"> <i class="fa fa-fw fa-lock"></i>Login</a></p>
+  <p>Already have an account? <a [routerLink]="['/login']"> <i class="fa fa-fw fa-lock"></i>Login</a></p>
 </form>

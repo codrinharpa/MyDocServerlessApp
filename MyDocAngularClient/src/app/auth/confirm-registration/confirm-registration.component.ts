@@ -45,7 +45,7 @@ export class ConfirmRegistrationComponent implements OnInit {
         } else { //success
             //move to the next step
             console.log("Moving to securehome");
-            this.router.navigate(['/home/login']);
+            this.router.navigate(['/login']);
         }
     }
 
