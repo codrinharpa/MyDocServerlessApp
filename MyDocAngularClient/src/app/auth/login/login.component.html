@@ -1,4 +1,20 @@
-<app-navbar></app-navbar>
+<nav class="navbar navbar-expand-md navbar-light bg-light navbar-center">
+        <a class="navbar-brand" href="#">Doctorul Meu</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+
+          </ul>
+          <ul class="navbar-nav navbar-right">
+            <li class="nav-item">
+              <a class="nav-link" id = "home-register" class = "round-button" [routerLink]="['/register']">Inregistrare</a>
+            </li>
+        </ul>
+        </div>
+      
+</nav>
       
 <div *ngIf="showSuccessMessage" class = "alert alert-success">
         {{successMessage}}
@@ -12,26 +28,25 @@
   </div>
   <div *ngIf="!mfaStep">
       <div class="form-group">
-          <label class="control-label" for="signupEmail">Email</label>
-          <input id="signupEmail" required type="email" maxlength="100" class="form-control" [(ngModel)]="email"
+          <input id="signupEmail" required placeholder = "Email" type="email" maxlength="100" class="form-control" [(ngModel)]="email"
                  [ngModelOptions]="{standalone: true}">
       </div>
 
       <div class="form-group">
-          <label class="control-label" for="signupPassword">Password</label>
-          <input id="signupPassword" required type="password" maxlength="25" class="form-control"
+          <input id="signupPassword" placeholder = "Parola" required type="password" maxlength="25" class="form-control"
                  length="40" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
       </div>
-      <div class="form-group">
-          <button (click)="onLogin()" id="signupSubmit" type="submit" class="btn btn-info btn-block">
-              Login
+      <div class="form-group" style = " display: flex;align-items: center;justify-content: center;">
+          <button (click)="onLogin()" id="signupSubmit" type="submit" class="btn btn-light">
+              Autentificare
           </button>
+          <p class="center-text">
+            <small><a [routerLink]="['/forgotPassword']" class="forgotpwd-link">I forgot my password &gt;</a></small>
+        </p>
       </div>
 
       <hr>
       <p>
-          <a [routerLink]="['/register']"> <i class="fa fa-fw fa-group"></i> Register</a>
-          <a [routerLink]="['/forgotPassword']"> <i class="fa fa-fw fa-group"></i> Forgot Password?</a><br/>
           <a [routerLink]="['/resendCode']"> <i class="fa fa-fw fa-group"></i> Resend Confirmation Code</a>
       </p>
 

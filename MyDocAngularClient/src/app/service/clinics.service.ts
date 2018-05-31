@@ -59,5 +59,23 @@ export class ClinicsService {
           )
         });
     }
+    getDoctors(){
+      var route = "/getDoctors";
+      let client = this.httpClient;
+      this.cognitoUtil.getCurrentUser().getSession(function(err,session){
+        if(err){
+
+          return;
+        }
+        let httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type':  'application/json',
+            'Authorization': session.getIdToken().getJwtToken()
+          })
+        };
+        return client.get(endpoint + route, httpOptions);
+      });
+      return client.get(endpoint + route, httpOptions);
+    }
 
 }

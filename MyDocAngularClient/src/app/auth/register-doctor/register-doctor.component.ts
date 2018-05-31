@@ -26,6 +26,7 @@ export class RegisterDoctorComponent{
     registrationDoctor: RegistrationDoctor;
     router: Router;
     errorMessage: string;
+    showSuccessMessage:boolean;
     registrationFormGroup: FormGroup;
     specializations: any;
     

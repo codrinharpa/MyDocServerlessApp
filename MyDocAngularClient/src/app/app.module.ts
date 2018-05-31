@@ -18,7 +18,6 @@ import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ConfirmRegistrationComponent } from './auth/confirm-registration/confirm-registration.component';
 import { NewpasswordComponent } from './auth/newpassword/newpassword.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { ClinicsNavbarComponent } from './secure/clinics/clinics-navbar/clinics-navbar.component';
 import { AgmCoreModule,MapsAPILoader } from '@agm/core';
 import { } from '@types/googlemaps';
@@ -33,10 +32,16 @@ import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/log
 import { DoctorsHomeComponent } from './secure/doctors/doctors-home/doctors-home.component';
 import { DoctorsNavbarComponent } from './secure/doctors/doctors-navbar/doctors-navbar.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
 import { UpdateComponent } from './auth/update/update.component'
 import { ImageUploadModule } from "angular2-image-upload"
 import { UtilsService } from './service/utils.service';
 import { ClinicsMenuComponent } from './secure/clinics/clinics-menu/clinics-menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import * as jQuery from 'jquery';
+import { AutoCompleteModule, ScheduleModule, DialogModule, CalendarModule, DropdownModule } from 'primeng/primeng';
+(window as any).jQuery = (window as any).$ = jQuery; // This is needed to resolve issue.
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +49,6 @@ import { ClinicsMenuComponent } from './secure/clinics/clinics-menu/clinics-menu
     AboutComponent,
     RegisterComponent,
     NewpasswordComponent,
-    NavbarComponent,
     ClinicsNavbarComponent,
     MapComponent,
     ConfirmRegistrationComponent,
@@ -58,9 +62,11 @@ import { ClinicsMenuComponent } from './secure/clinics/clinics-menu/clinics-menu
     DoctorsNavbarComponent,
     ForgotPasswordComponent,
     UpdateComponent,
-    ClinicsMenuComponent
+    ClinicsMenuComponent,
+    SchedulerComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     ImageUploadModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyDMTXagwBKP_WjEBQQRPHXT5YhA9MOyEm8",
@@ -71,7 +77,8 @@ import { ClinicsMenuComponent } from './secure/clinics/clinics-menu/clinics-menu
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+        ScheduleModule
   ],
   providers: [
     CognitoUtil,

@@ -9,7 +9,21 @@ body {
     font-style: normal;
     font-weight: 100;
  }
+ .btn-turc{
+    background-color:#00cfca;
+    color:white;
+ }
+ .btn-light{
+    padding: 1em 2rem;
+    font-size: .875em;
+    background: #f6f9f9;
+    display: inline-block;
+    font-weight: 500;
+    box-shadow: 0 1px 4px rgba(0,0,0,.15);
+    border-radius: 50px;
+ }
  .starter-template {
      padding: 3rem 1.5rem;
      text-align: center;
  }
+ @import "../node_modules/angular-calendar/css/angular-calendar.css";

@@ -1,24 +1,49 @@
-<app-navbar></app-navbar>
+<nav class="navbar navbar-expand-md navbar-light bg-light navbar-center">
+    <a class="navbar-brand" href="#">Doctorul Meu</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">Avantaje<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Preturi<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Contact<span class="sr-only">(current)</span></a>
+          </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" id = "home-register" class = "round-button" [routerLink]="['/register']">Inregistrare</a>
+        </li>
+    </ul>
+    </div>
+  
+</nav>
       
 <div *ngIf="showSuccessMessage" class = "alert alert-success">
         {{successMessage}}
 </div>
 <form [formGroup]="registrationFormGroup" class="register-form"  method="POST" action="#" role="form">
-  <div class="form-group">
-      <h2>Inregistrare</h2>
-  </div>
   <div *ngIf="errorMessage!=null" class="alert alert-danger">
       {{ errorMessage }}
   </div>
+  <div>
+    <h1 class = "header-grey-big">Porneste la drum</h1>
+    <p class = "header-grey-medium">Inregistreaza-ti clinica</p>
+    </div>
   <div class="form-group row">
-      <label class="control-label col-sm-2 col-form-label" for="signupName">Nume</label>
+      <label class="col-sm-2" for="signupName">Nume</label>
       <div class = "col-sm-6">
         <input id="signupName" type="text" maxlength="50" class="form-control"
         formControlName="name" [(ngModel)]="registrationUser.name">
       </div>
   </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2 col-form-label" for="signupEmail">Email</label>
+        <label class="col-sm-2" for="signupEmail">Email</label>
         <div class = "col-sm-6">
             <input id="signupEmail" type="email" maxlength="50" class="form-control" formControlName="email" [(ngModel)]="registrationUser.email">
         </div>
@@ -28,7 +53,7 @@
         </div>
     </div>
   <div class="form-group row">
-      <label class="control-label col-sm-2 col-form-label" for="signupPhone">Telefon</label>
+      <label class="col-sm-2" for="signupPhone">Telefon</label>
       <div class = "col-sm-6">
         <input id="signupPhone" type="tel" maxlength="13" class="form-control" formControlName="phone" [(ngModel)]="registrationUser.phone">
       </div>
@@ -38,7 +63,7 @@
     </div>
   </div>
   <div class="form-group row">
-        <label class="control-label col-sm-2 col-form-label" for="signupCity">Oras</label>
+        <label class="col-sm-2" for="signupCity">Oras</label>
         <div class = "col-sm-6">
             <select id="signupCity" class="custom-select" formControlName="city" [(ngModel)]="registrationUser.city" (change)="onLocationChange($event.target.value)">
                 <option [ngValue]="undefined" disabled  selected> Selectati un oras </option>
@@ -50,7 +75,7 @@
         </div>  
     </div>
     <div class="form-group row">
-            <label class="control-label col-sm-2 col-form-label" for="practiceType">Tipul cabinetului</label>
+            <label class="col-sm-2" for="practiceType">Tipul cabinetului</label>
             <div class = "col-sm-6">
                 <select id="practiceType" class="custom-select" formControlName="practiceType" [(ngModel)]="registrationUser.practiceType">
                     <option [ngValue]="undefined" disabled  selected> Tipul cabinetului</option>
@@ -63,7 +88,7 @@
     </div>
 
   <div class="form-group row ">
-      <label class="control-label col-sm-2 col-form-label " for="signupDescription">Descriere</label>
+      <label class="col-sm-2" for="signupDescription">Descriere</label>
       <div class = "col-sm-6">
         <textarea id="signupDescription" maxlength="256" class="form-control"formControlName="description" [(ngModel)]="registrationUser.description">
         </textarea>
@@ -102,10 +127,10 @@
   </div>
 
   <div class="form-group">
-      <button (click)="onRegister()" id="signupSubmit" type="button" [disabled]="!registrationFormGroup.valid" class="btn btn-info btn-block">
+      <button (click)="onRegister()" id="signupSubmit" type="button" [disabled]="!registrationFormGroup.valid" class="btn btn-turc btn-block">
           Create your account
       </button>
   </div>
   <hr>
-  <p>Already have an account? <a [routerLink]="['/login']"> <i class="fa fa-fw fa-lock"></i>Login</a></p>
+  <p>Ai deja un cont? <a id = "signup-link" [routerLink]="['/login']"> <i class="fa fa-fw fa-lock"></i>Inregistrare</a></p>
 </form>

@@ -1,21 +1,14 @@
 <div id="side-menu">
   <ul class="nav">
-    
-      
-        <li class="side-nav-tooltip" id="side-dashboard" title="" data-toggle="tooltip" data-original-title="Dashboard"><a href="/dashboard" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a></li>
-      
-    
-      <li class="noDisplay" id="side-calendar" title="Calendar" data-toggle="tooltip">
-        <a href="/weekly.do"><small>Calendar</small></a>
+      <li class="side-nav-tooltip" (click)="toggleDoctorSelect()">
+        <a class = "fa fa-user-md" ><small>Doctor</small></a>
+        <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
+        AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
+            9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
       </li>
-      <li class="side-nav-tooltip" id="side-calendar" title="" data-toggle="tooltip" data-original-title="Calendar">
+      <li class="side-nav-tooltip">
         <a href="" data-toggle="tab" class="fa fa-calendar" id="startCalendar"><small>Calendar</small></a>
       </li>
-    
-
-
-    
-      <!--<li class=" "><a href="#classes" data-toggle="tab">Classes</a></li>-->
       <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers">
         <a href="" data-toggle="tab" class="fa fa-cog" id="side-nav-customers"><small>Setari</small></a>
       </li>
@@ -23,14 +16,8 @@
       <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers">
         <a href="" data-toggle="tab" class="fa fa-address-book" id="side-nav-customers"><small>Pacienti</small></a>
       </li>
-
-    
-
-    
-      
-        <li class="side-nav-tooltip" id="side-profile" title="" data-toggle="tooltip" data-original-title="Apps &amp; Integrations">
-          <a href="/profile/#configure" data-toggle="tab" class="setmore-icon-laptop-phone"><small>Profile&nbsp;</small></a>
-
-        </li>
   </ul>
+</div>
+<div id="doctor-select" *ngIf="showdoctorselect">
+
 </div>

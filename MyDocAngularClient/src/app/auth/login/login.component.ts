@@ -14,6 +14,8 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback, OnInit
     email: string;
     password: string;
     errorMessage: string;
+    showSuccessMessage:string;
+    toggleNavOpened:boolean;
     mfaStep = false;
     mfaData = {
         destination: '',

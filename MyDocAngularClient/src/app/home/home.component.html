@@ -1,5 +1,33 @@
-<app-navbar></app-navbar>
-      
+<!-- <app-navbar></app-navbar>
+       -->
+<nav class="navbar navbar-expand-md navbar-dark navbar-center navbar-over" [ngClass] ="{'navbar-opened': navOpened}">
+  <a class="navbar-brand" href="#">Doctorul Meu</a>
+  <button class="navbar-toggler" (click) = "toggleNavOpened()" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Avantaje<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Preturi<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Contact<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+      <li class="nav-item">
+        <a class="nav-link" id = "home-login"  class = "round-button" [routerLink]="['/login']">Logare</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id = "home-register" class = "round-button" [routerLink]="['/register']">Inregistrare</a>
+      </li>
+  </ul>
+  </div>
+
+</nav>
 <div *ngIf="showSuccessMessage" class = "alert alert-success">
         {{successMessage}}
 </div>
@@ -7,6 +35,8 @@
         <div class = "center">
                 <h1>Planificare programari pentru doctori si clinici</h1>
                 <h2>Coordoneaza-ti clinica de la distanta.</h2>
-        </div>
-      
+        </div>    
+</div>
+<div style="background:#f1f5f7;text-align: center;">
+        <h2 style="font-size: 3rem;text-align: center;color:#00cfca;">Trateaza-ti neajunsurile programarilor clasice </h2> <br><br>
 </div>

@@ -1,5 +1,58 @@
-.home-banner{
+.navbar-over{
     position: absolute;
+    width: 100%;
+    z-index: 100;
+}
+.navbar-center{
+    padding-left:20vw;
+    padding-right:20vw;
+}
+.navbar-fixed{
+    position: fixed;
+    background-color:#00cfca;;
+}
+.navbar-opened{
+    background-color:#00cfca;;
+}
+.navbar-opened .navbar-right{
+
+}
+.navbar-opened .navbar-right li{
+    margin-left:10px;
+    margin-top:10px
+}
+
+.navbar-over.nav-link{
+    padding: 0 14px;
+    font-size: 1rem;
+    font-weight: 300;
+    color: grey!important;
+}
+
+
+.round-button{
+    border: 1px solid transparent;
+    padding: 7px 10px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.round-button a{
+    font-size:10px!important;
+    color: #fff!important;
+    text-decoration: none;
+}
+#home-login {
+    border: 1px solid;
+    margin-right: 7px;
+    color: #fff!important;
+}
+#home-register{
+    background: #ff55a0;
+    color: #fff!important;
+}
+
+.home-banner{
+    position: relative;
     background-image: url('assets/img/Doctors@2x-min.png');
     // content: url('../../assets/img/Doctors@2x-min.png'); 
     // background: url('assets/img/checklist-3222079.jpg') fixed; 
@@ -11,8 +64,8 @@
     width:100%;
 }
 .center{
-    margin-top:50px;
-    padding: 30px;
+    // margin-top:50px;
+    padding: 80px;
     display: block;
     text-align:center;
 }

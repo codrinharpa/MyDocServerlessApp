@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClinicsService } from '../../../service/clinics.service';
 
 @Component({
   selector: 'app-clinics-menu',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./clinics-menu.component.scss']
 })
 export class ClinicsMenuComponent implements OnInit {
-
-  constructor() { }
+  public showdoctorselect: boolean = false;
+  public doctors:any[];
+  constructor(public clinicService: ClinicsService) { }
 
   ngOnInit() {
+    this.clinicService.getDoctors().subscribe( (data) =>{
+      console.log(data);
+  });
+
+  }
+  toggleDoctorSelect(){
+    this.showdoctorselect = !this.showdoctorselect;
   }
 
 }

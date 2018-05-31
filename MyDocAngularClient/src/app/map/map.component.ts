@@ -9,8 +9,8 @@ import { AgmCoreModule,MapsAPILoader } from '@agm/core';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-    private _latitude: number ;
-    private _longitude: number ;
+    public _latitude: number ;
+    public _longitude: number ;
     public markerLatitude: number ;
     public markerLongitude: number ;
     public searchControl: FormControl;

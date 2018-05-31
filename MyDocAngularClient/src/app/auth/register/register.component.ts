@@ -29,6 +29,8 @@ export class RegistrationUser {
 export class RegisterComponent implements CognitoCallback {
     registrationUser: RegistrationUser;
     router: Router;
+    showSuccessMessage:boolean;
+    successMessage:string;
     errorMessage: string;
     registrationFormGroup: FormGroup;
     passwordFormGroup: FormGroup;

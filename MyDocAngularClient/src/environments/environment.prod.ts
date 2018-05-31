@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
 
   region: 'eu-central-1',
   clinicsDoctorsPool:{
@@ -7,7 +7,7 @@ export const environment = {
     UserPoolId: "eu-central-1_9xDnzevn7",
     ClientId: "54ktu9uu99hocaq4daa41kbaur",
   },
-
+  utilsServiceEndpoint: "https://wz7mf6t6s2.execute-api.eu-central-1.amazonaws.com/dev/utils",
   clinicsServiceEndpoint: "https://oogo5xxxm6.execute-api.eu-central-1.amazonaws.com/dev/clinics",
   doctorsServiceEndpoint: "https://8yz2std66h.execute-api.eu-central-1.amazonaws.com/dev/clinics",
 

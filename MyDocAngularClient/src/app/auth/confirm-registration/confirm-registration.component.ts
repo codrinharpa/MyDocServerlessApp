@@ -12,9 +12,10 @@ import { CognitoUserSession } from 'amazon-cognito-identity-js';
 })
 export class ConfirmRegistrationComponent implements OnInit {
 
-  confirmationCode: string;
+    confirmationCode: string;
     email: string;
     errorMessage: string;
+    showSuccessMessage:boolean;
     private sub: any;
 
     constructor(public regService: UserRegistrationService, public router: Router, public route: ActivatedRoute) {

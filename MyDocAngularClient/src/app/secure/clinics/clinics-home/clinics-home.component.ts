@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserLoginService } from '../../../service/user-login.service';
 import { LoggedInCallback } from '../../../service/cognito.service';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-clinics-home',
   templateUrl: './clinics-home.component.html',
@@ -11,11 +10,12 @@ import { Router } from '@angular/router';
 export class ClinicsHomeComponent implements OnInit,LoggedInCallback {
   public showSuccessMessage:Boolean;
   public successMessage:String;
+  public doctorEmail:String = 'andrei.harpa.ah@gmail.com';
   constructor(public userService:UserLoginService,public router:Router) { 
     this.userService.isAuthenticated(this);
     this.showSuccessMessage = false;
   }
-
+  
   setSuccessMessage(successMessage){
     this.successMessage = successMessage;
     this.showSuccessMessage = true;
