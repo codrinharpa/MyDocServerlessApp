@@ -38,6 +38,7 @@ import { ImageUploadModule } from "angular2-image-upload"
 import { UtilsService } from './service/utils.service';
 import { ClinicsMenuComponent } from './secure/clinics/clinics-menu/clinics-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScrollToModule } from 'ng2-scroll-to-el';
 import * as jQuery from 'jquery';
 import { AutoCompleteModule, ScheduleModule, DialogModule, CalendarModule, DropdownModule } from 'primeng/primeng';
 (window as any).jQuery = (window as any).$ = jQuery; // This is needed to resolve issue.
@@ -72,6 +73,7 @@ import { AutoCompleteModule, ScheduleModule, DialogModule, CalendarModule, Dropd
       apiKey: "AIzaSyDMTXagwBKP_WjEBQQRPHXT5YhA9MOyEm8",
        libraries: ["places"]
     }),
+    ScrollToModule.forRoot(),
     HttpClientModule,
     RouterModule,
     BrowserModule,

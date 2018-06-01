@@ -35,10 +35,6 @@
     padding: 7px 10px;
     border-radius: 50px;
     cursor: pointer;
-}
-.round-button a{
-    font-size:10px!important;
-    color: #fff!important;
     text-decoration: none;
 }
 #home-login {
@@ -81,4 +77,16 @@ h2{
     font-weight: 100;
     color: #fff;
     font-size: 1.85rem;
+}
+.icon-bubble {
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto;
+    background: gray;
+    border-radius: 50%;
+    text-align: center;
+    background: #fff;
+    color: #db468f;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.1);
 }

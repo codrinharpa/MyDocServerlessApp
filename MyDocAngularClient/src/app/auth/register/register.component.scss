@@ -2,12 +2,29 @@
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,.2)
 }
+.round-button{
+    border: 1px solid transparent;
+    padding: 7px 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #fff!important;
+    text-decoration: none;
+}
+#register-login {
+    border: 1px solid #ddd;
+    margin-right: 7px;
+    color: #777!important;
+    font-size: 17px;
+    box-shadow: 4px 4px 15px 0 rgba(46,61,73,.15);
+}
 .register-form {
     margin-top:60px;
     max-width: 830px;
-    padding: 15px;
+    padding: 0px 30px 0px 30px;
     margin: 0 auto;
     background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2);
 }
 
 .register-form .form-control {
@@ -59,6 +76,9 @@ select{
 label{
     margin-top: 18px;
 }
+#signup-link{
+    color:#00cfca;
+}
 .header-grey-big{
     font-weight: 100;
     color: #555;
@@ -72,3 +92,15 @@ label{
     line-height: 1.2;
     margin-top: 20px;
 } 
+
+.title-register{
+    text-align: center;
+}
+@media only screen and (max-width: 600px) {
+    .header-grey-big{
+        font-size:34px;
+    }
+    .header-grey-medium{
+        font-size:16px;
+    }
+}

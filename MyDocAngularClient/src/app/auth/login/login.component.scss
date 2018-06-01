@@ -45,10 +45,6 @@ input{
     padding: 7px 10px;
     border-radius: 50px;
     cursor: pointer;
-}
-.round-button a{
-    font-size:10px!important;
-    color: black!important;
     text-decoration: none;
 }
 #home-login {
@@ -59,4 +55,20 @@ input{
 #home-register{
     background: #ff55a0;
     color: #fff!important;
+}
+.header-grey-big{
+    font-weight: 100;
+    color: #555;
+    font-size: 3.25rem;
+    line-height: 1.2;
+    margin-top: 1em;
+}
+.header-grey-medium{
+    color: #555;
+    font-size: 1.70rem;
+    line-height: 1.2;
+    margin-top: 20px;
+}
+.title-login{
+    margin-bottom: 20px;
 }

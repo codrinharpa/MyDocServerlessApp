@@ -25,6 +25,11 @@ export class HomeComponent implements OnInit, LoggedInCallback{
   constructor(public el: ElementRef,public userService:UserLoginService) { 
     this.navOpened = false;
   }
+  scrollToAdvantages(event){
+    event.preventDefault();
+    console.log('marie');
+    event.scrollTo('200');
+  }
  
   toggleNavOpened(){
     this.navOpened = !this.navOpened;

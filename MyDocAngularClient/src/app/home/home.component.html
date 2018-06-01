@@ -1,20 +1,20 @@
 <!-- <app-navbar></app-navbar>
        -->
 <nav class="navbar navbar-expand-md navbar-dark navbar-center navbar-over" [ngClass] ="{'navbar-opened': navOpened}">
-  <a class="navbar-brand" href="#">Doctorul Meu</a>
+  <a class="navbar-brand" href="#"><i class="fa fa-fw fa-user-md"></i> Doctorul Meu</a>
   <button class="navbar-toggler" (click) = "toggleNavOpened()" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Avantaje<span class="sr-only">(current)</span></a>
+        <a class="nav-link" [scrollTo]="'#home-advantages'" [scrollDuration]="1500" >Avantaje</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Preturi<span class="sr-only">(current)</span></a>
+        <a class="nav-link" [scrollTo]=" '#home-pricing' ">Preturi</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Contact<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Contact</a>
       </li>
     </ul>
     <ul class="navbar-nav navbar-right">
@@ -37,6 +37,34 @@
                 <h2>Coordoneaza-ti clinica de la distanta.</h2>
         </div>    
 </div>
-<div style="background:#f1f5f7;text-align: center;">
-        <h2 style="font-size: 3rem;text-align: center;color:#00cfca;">Trateaza-ti neajunsurile programarilor clasice </h2> <br><br>
-</div>
+<section id = "home-about" style="background:#f1f5f7;text-align: center;">
+    <h2 style="font-size: 3rem;text-align: center;color:#00cfca;">Trateaza-ti neajunsurile programarilor clasice</h2> <br><br>
+            <!--class="side-content"-->
+        <div id = "home-advantages" class="row" style="text-align: center;padding-left: 17.5%;width: 85%;">
+            <div class="col-md-4">
+                <div class="icon-bubble" style="width: 10rem;height: 10rem;">
+                    <img src="assets/img/book.png" style=" width: 45%;margin-top: 28%;">
+                </div>
+                
+                <h4>Amplifica Productivitatea</h4>
+                <p>Focuseaza-te pe calitatea grijii oferite prin intermediul unui soft de programari care este intuitiv si usor de folosit.<br><br></p>
+            </div>
+            <div class="col-md-4">
+                <div class="icon-bubble" style="width: 10rem;height: 10rem;">
+                    <img src="assets/img/stopwatch.png" style=" width: 45%;margin-top: 28%;">
+                </div>
+                
+                <h4>Fara programari neonorate</h4>
+                <p>Notificarile SMS si Email amintesc pacientului de urmatoarele lor programari.<br><br></p>
+            </div>
+            <div class="col-md-4">
+                <div class="icon-bubble" style="width: 10rem;height: 10rem;">
+                    <img src="assets/img/stats-dots.png" style=" width: 45%;margin-top: 28%;">
+                </div>
+                
+                <h4>Access de pretutindeni</h4>
+                <p>Acceseaza calendarul programarilor si detaliile de contact ale pacientului de la orice dispozitiv conectat, inauntrul sau in afara clinicii.</p><br><br>
+            
+            </div>
+        </div>
+</section>
