@@ -18,14 +18,17 @@ export class ClinicsService {
     token: string;
     constructor(public cognitoUtil:CognitoUtil,private httpClient: HttpClient) {
         let vm = this;
-        this.cognitoUtil.getCurrentUser().getSession(function(err,session){
-            if(err){
-                console.log(err);
-                vm.token = null;
-                return;
-            }
-            vm.token = session.getIdToken().getJwtToken();
-        });
+        let currentUser = this.cognitoUtil.getCurrentUser();
+        if(currentUser){
+            currentUser.getSession(function(err,session){
+                if(err){
+                    console.log(err);
+                    vm.token = null;
+                    return;
+                }
+                vm.token = session.getIdToken().getJwtToken();
+            });
+        }
     }
 
     // Uses http.get() to load data from a single API endpoint
