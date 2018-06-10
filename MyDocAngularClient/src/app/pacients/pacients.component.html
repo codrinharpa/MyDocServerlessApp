@@ -1,0 +1,64 @@
+<div class = "pacients">
+   <div class = "row">
+        <div class = "col-md-3">
+            <app-pacient-search (pacientDetails) = "setPacientDetails($event)">
+            </app-pacient-search>
+        </div>
+        <div class = "col-md-4">
+            <div *ngIf = "pacientDetails">
+                <div class = "pacientimageUploader">
+                    <img src="assets/img/user.png">
+                </div>
+                <ul class = "pacientDetailsAttributes">
+                    <li > 
+                        <label class = "pacientAttribute">Nume</label>
+                        <p class = "pacientAttributeValue"> {{ pacientDetails['surname'] }}</p>
+                    </li>
+                    <li > 
+                        <label class = "pacientAttribute">Prenume</label>
+                        <p class = "pacientAttributeValue"> {{ pacientDetails['firstname'] }}</p>
+                    </li>
+                    <li > 
+                        <label class = "pacientAttribute">Data nasterii</label>
+                        <p class = "pacientAttributeValue"> {{ pacientDetails['birthdate'] }}</p>
+                    </li>
+                    <li > 
+                        <label class = "pacientAttribute">Telefon</label>
+                        <p class = "pacientAttributeValue"> {{ pacientDetails['phone'] }}</p>
+                    </li>
+                    <li > 
+                        <label class = "pacientAttribute">Email</label>
+                        <p class = "pacientAttributeValue"> {{ pacientDetails['email'] }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-5">
+            <div class="tabHolder">
+                <ul id="tabsList">
+                    <li class="first menu active">Programari</li>
+                    <li class="menu">Notite</li>
+                    <li class="menu">Documente</li>
+                    
+                    
+                    <div class="unmerge-settings-icon headerRightHolder headerRightHolder-settings pull-right">
+                    <div class="menu-button pull-left" style="top: 38px;">
+                        <div class="">
+                            <i class="icon-cog menu-icon"></i>
+                        </div>
+                        <div class="cal-settings-opt-holder menu-list-popup" style="margin: 0px auto; padding-top: 19px;">
+                        <ul class=" header-cal-settings-dropdown cal-settings-options cal-popup " style="width: 148px;">
+                            <div class="up-arrow"></div>
+                        <!-- <li class="options staff-openapp-opt selectable open-stats deleteSelectedCustomer" style="width: 128px;"> Delete </li> -->
+                            <li class="options staff-double-opt selectable open-stats unMergeSelectedCustomer" style="width: 128px;"> Unmerge </li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                    
+                
+                    </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,14 +7,14 @@
             9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
       </li>
       <li class="side-nav-tooltip">
-        <a href="" data-toggle="tab" class="fa fa-calendar" id="startCalendar"><small>Calendar</small></a>
+        <a [routerLink]="['appointments']" data-toggle="tab" class="fa fa-calendar" id="startCalendar"><small>Calendar</small></a>
       </li>
       <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers">
         <a href="" data-toggle="tab" class="fa fa-cog" id="side-nav-customers"><small>Setari</small></a>
       </li>
 
       <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers">
-        <a href="" data-toggle="tab" class="fa fa-address-book" id="side-nav-customers"><small>Pacienti</small></a>
+        <a [routerLink]="['pacients']" data-toggle="tab" class="fa fa-address-book" id="side-nav-customers"><small>Pacienti</small></a>
       </li>
   </ul>
 </div>

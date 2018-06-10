@@ -1,0 +1,35 @@
+
+<div class = "addPacientFields" [formGroup]="createPacientFormGroup">
+    <div class = "form-group">
+        <h3 style="background-color: #f8f8f8;font-size: 15px;padding: 8px 14px;">Adauga Pacient</h3>
+    </div>
+    <div *ngIf="successMessage" class = "alert alert-success" style="height: 40px;">
+        <h3 style="font-size: 15px;">{{successMessage}}</h3>
+    </div>
+    <div *ngIf="errorMessage" class = "alert alert-danger">
+        <h3 style="font-size: 15px;">{{errorMessage}}</h3>
+    </div>
+    <div class = "form-group">
+        <input class="form-control" type="text" placeholder="Nume" formControlName="surname" [(ngModel)]="pacient.surname">
+    </div>
+    <div class = "form-group">
+        <input class="form-control" type="text" placeholder="Prenume" formControlName="firstname" [(ngModel)]="pacient.firstname">
+    </div>
+    <div class = "form-group">
+        <input type="radio" name = "gender" formControlName="gender" value = "male" [(ngModel)]="pacient.gender"> Barbat
+        <input type="radio" name = "gender" formControlName="gender" value = "female" [(ngModel)]="pacient.gender"> Femeie
+    </div>
+    <div class = "form-group">
+        <input class="form-control" type="date" name = "birthdate" formControlName="birthdate" placeholder = "Data de nastere" [(ngModel)]="pacient.birthdate">
+    </div>
+    <div class = "form-group">
+        <input class="form-control" type="text" placeholder="Telefon" formControlName="phone" [(ngModel)]="pacient.phone">
+    </div>
+    <div class = "form-group">
+        <input class="form-control" type="text" placeholder="Email" formControlName="email" [(ngModel)]="pacient.email">
+    </div>
+    <div class = "form-group">
+        <button [disabled]="!createPacientFormGroup.valid" class="round-corners-button btn-turc" (click) = "onCreatePacient()">Creeaza pacient</button>
+        <button class="round-corners-button" (click) = "onCloseClick()" >Anulare</button>
+    </div>
+</div>

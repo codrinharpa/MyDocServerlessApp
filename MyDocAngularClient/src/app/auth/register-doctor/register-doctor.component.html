@@ -1,9 +1,13 @@
 <form [formGroup]="registrationFormGroup" class="register-form"  method="POST" action="#" role="form">
-    <div class="form-group">
-        <h2>Adauga doctor</h2>
+    <div class = "title-registerDoctor">
+        <h1 class = "header-grey-big">Inregistrare doctor</h1>
+        <p class = "header-grey-medium">Adauga un doctor clinicii tale</p>
     </div>
-    <div *ngIf="errorMessage!=null" class="alert alert-danger">
+    <div *ngIf="errorMessage" class="alert alert-danger">
         {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
     </div>
     <div class="form-group row">
         <label class="control-label col-sm-2 col-form-label" for="signupFirstname">Prenume</label>
@@ -12,7 +16,7 @@
           formControlName="firstname" [(ngModel)]="registrationDoctor.firstname">
         </div>
         <div class = "col-sm-4">
-                <p class="text-danger" *ngIf="firstname.errors?.required && firstname.touched">Campul prenume este necesar</p>
+            <p class="text-danger" *ngIf="firstname.errors?.required && firstname.touched">Campul prenume este necesar</p>
         </div>
     </div>
     <div class="form-group row">
@@ -59,7 +63,7 @@
     </div>
   
     <div class="form-group">
-        <button (click)="onCreateDoctor()" id="signupSubmit" type="button" [disabled]="!registrationFormGroup.valid" class="btn btn-info btn-block">
+        <button (click)="onCreateDoctor()" id="signupSubmit" type="button" [disabled]="!registrationFormGroup.valid" class="btn btn-turc btn-block">
             Adauga doctor
         </button>
     </div>

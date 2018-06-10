@@ -79,28 +79,6 @@ label{
 #signup-link{
     color:#00cfca;
 }
-.header-grey-big{
-    font-weight: 100;
-    color: #555;
-    font-size: 3.25rem;
-    line-height: 1.2;
-    margin-top: 1em;
-}
-.header-grey-medium{
-    color: #555;
-    font-size: 1.70rem;
-    line-height: 1.2;
-    margin-top: 20px;
-} 
-
 .title-register{
     text-align: center;
-}
-@media only screen and (max-width: 600px) {
-    .header-grey-big{
-        font-size:34px;
-    }
-    .header-grey-medium{
-        font-size:16px;
-    }
 }

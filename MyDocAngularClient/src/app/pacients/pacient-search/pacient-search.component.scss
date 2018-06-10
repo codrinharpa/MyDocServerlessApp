@@ -1,0 +1,67 @@
+.pacient-search{
+    background-color:#f1f5f7;
+    height: 80%;
+    overflow: auto;
+}
+.pacient-action-box{
+    border-bottom: 1px solid #CCC;
+    padding: 20px 0 10px 0px;
+    position: relative;
+    margin: 0 30px;
+}
+.pacient-action-box input{
+    display: inline-block;
+    width:200px;
+    padding:0px;
+    border: solid 0px transparent !important;
+    outline: none;
+    background-color:#f1f5f7;
+}
+.add-pacient-button{
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+    height: 30px;
+    width: 30px;
+    padding: 0px;
+    float: right;
+    border: solid 1px #D7D7D7;
+    background: #FFF;
+    text-decoration: none;
+    color: #000;
+    text-indent: 0px;
+    text-align: center;
+    cursor: pointer;
+}
+.add-pacient-popup{
+    top:150px;
+    left:150px;
+}
+.pacient-list{
+    padding: 10px 30px;
+    overflow: auto;
+    height: 90%;
+    width:100%;
+}
+.pacient-list-item{
+    cursor: pointer;
+    background: #E1E7EB;
+    border-radius: 4px;
+    color: #000;
+    list-style-type: none;
+    padding:3px 0px 0px 0px;
+    margin: 0px 0px 7px 0px;
+}
+.pacient-list-item:hover{
+    background: rgb(224, 239, 250);
+}
+.pacient-list-item img{
+    margin: 0px 5px 3px 12px;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+}
+.pacient-list-item label{
+    margin: 0px;
+}

@@ -41,6 +41,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScrollToModule } from 'ng2-scroll-to-el';
 import * as jQuery from 'jquery';
 import { AutoCompleteModule, ScheduleModule, DialogModule, CalendarModule, DropdownModule } from 'primeng/primeng';
+import { CreatePacientComponent } from './pacients/create-pacient/create-pacient.component';
+import { PacientSearchComponent } from './pacients/pacient-search/pacient-search.component';
+import { PacientsComponent } from './pacients/pacients.component';
+import { PacientsService } from './service/pacients.service';
 (window as any).jQuery = (window as any).$ = jQuery; // This is needed to resolve issue.
 
 @NgModule({
@@ -64,7 +68,10 @@ import { AutoCompleteModule, ScheduleModule, DialogModule, CalendarModule, Dropd
     ForgotPasswordComponent,
     UpdateComponent,
     ClinicsMenuComponent,
-    SchedulerComponent
+    SchedulerComponent,
+    CreatePacientComponent,
+    PacientSearchComponent,
+    PacientsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -88,7 +95,8 @@ import { AutoCompleteModule, ScheduleModule, DialogModule, CalendarModule, Dropd
     UserLoginService,
     ClinicsService,
     GroupBasedRedirect,
-    UtilsService
+    UtilsService,
+    PacientsService
   ],
   bootstrap: [AppComponent]
 })

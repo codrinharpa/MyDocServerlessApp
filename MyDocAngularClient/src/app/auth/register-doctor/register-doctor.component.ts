@@ -26,7 +26,7 @@ export class RegisterDoctorComponent{
     registrationDoctor: RegistrationDoctor;
     router: Router;
     errorMessage: string;
-    showSuccessMessage:boolean;
+    successMessage:string;
     registrationFormGroup: FormGroup;
     specializations: any;
     
@@ -54,8 +54,16 @@ export class RegisterDoctorComponent{
     onCreateDoctor() {
         this.errorMessage = null;
         this.clinicsHome.setSuccessMessage('Successfully created');
-        this.clinicsService.createDoctor(this.registrationDoctor);
-        this.router.navigate(['/clinics']);
+        this.clinicsService.createDoctor(this.registrationDoctor).subscribe( (data:any) =>{
+            if(data.message == 'Created'){
+                this.successMessage = 'Doctorul a fost creeat cu succes';
+            }
+            else{
+                this.errorMessage = 'A fost intampinata o eroare';
+            }
+        },(err)=>{
+            this.errorMessage = 'A fost intampinata o eroare';
+        });
     }
 
     get firstname() { return this.registrationFormGroup.get('firstname'); }

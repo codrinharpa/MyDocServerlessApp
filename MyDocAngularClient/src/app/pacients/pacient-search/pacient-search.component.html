@@ -1,0 +1,15 @@
+<div class = "pacient-search">
+    <div class = "pacient-action-box">
+        <input type="text" class="form-control" value="" (input)="onSearchChange($event.target.value)" placeholder="Cauta pacient...">
+        <a class="add-pacient-button" (click)="toggleAddPacient(true)"> + </a>
+    </div>
+    <ul class = "pacient-list">
+        <li *ngFor = "let result of searchResults" class = "pacient-list-item" (click)="viewPacient(result.phone)">
+            <img src = "assets/img/user.png">
+            <label>{{ result.surname + ' ' + result.firstname }}</label>
+        </li>
+    </ul>
+</div>
+<div *ngIf = "addPacientShown" class = "add-pacient-popup pop-over">
+    <app-create-pacient (hideMe) = "toggleAddPacient(false)"></app-create-pacient>
+</div>

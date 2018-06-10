@@ -31,9 +31,8 @@ export class UserLoginService{
     private onLoginSuccess = (callback: CognitoCallback, session: CognitoUserSession) => {
 
         console.log("In authenticateUser onSuccess callback");
-        console.log(session);
-        AWS.config.credentials = this.cognitoUtil.buildCognitoCreds(session.getIdToken().getJwtToken());
-
+        AWS.config.credentials = this.cognitoUtil.buildCognitoCreds(session.getAccessToken().getJwtToken());
+        console.log(this.cognitoUtil.buildCognitoCreds(session.getIdToken().getJwtToken()));
         // So, when CognitoIdentity authenticates a user, it doesn't actually hand us the IdentityID,
         // used by many of our other handlers. This is handled by some sly underhanded calls to AWS Cognito
         // API's by the SDK itself, automatically when the first AWS SDK request is made that requires our
@@ -56,6 +55,7 @@ export class UserLoginService{
                 localStorage.setItem('clinicsDetails', JSON.stringify(data));
                 console.log(localStorage.getItem('clinicsDetails'));
             });
+        console.log(session.getIdToken().getJwtToken());
         this.groupRedirect.redirect(session);
     }
 
@@ -94,7 +94,7 @@ export class UserLoginService{
                     existingPassword: authenticationDetails.getPassword(),
                     password: null
                 }
-                this.router.navigate(['/home/changeTemporary']);
+                this.router.navigate(['changeTemporary']);
                 callback.cognitoCallback('User needs to set password.', null)
             },
             onSuccess: result => this.onLoginSuccess(callback, result),
