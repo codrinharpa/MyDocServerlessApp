@@ -15,13 +15,24 @@ export class PacientSearchComponent implements OnInit {
   constructor(public cognitoUtil: CognitoUtil,public pacientService: PacientsService) {}
 
     ngOnInit() {
-        this.pacientService.getPacientsNames()
-            .subscribe( (data) => {
-                this.pacients = data['pacients'];
-                this.searchResults = this.pacients;
-                this.viewPacient(this.searchResults[0].phone);
-            });
-  }
+        var localStoragePacients = localStorage.getItem('pacients');
+        console.log(localStoragePacients);
+        if(!localStoragePacients){
+            console.log(this.pacients.length);
+            this.pacientService.getPacientsNames()
+                .subscribe( (data) => {
+                    this.pacients = data['pacients'];
+                    this.searchResults = this.pacients;
+                    localStorage.setItem('pacients', JSON.stringify(this.pacients));
+                    this.viewPacient(this.searchResults[0].phone);
+                });
+        }
+        else{
+            this.pacients = JSON.parse(localStorage.getItem('pacients'));
+            this.searchResults = this.pacients;
+            this.viewPacient(this.pacients[0].phone);
+        }
+    }
   toggleAddPacient(isShown){
     this.addPacientShown = isShown;
   }
@@ -56,6 +67,10 @@ export class PacientSearchComponent implements OnInit {
         }
     }
     this.searchResults = results;
+  }
+  addNewPacientCreated(pacient){
+      this.pacients.push(pacient)
+      this.searchResults = this.pacients;
   }
   viewPacient(value){
     this.pacientService.getPacient(value)

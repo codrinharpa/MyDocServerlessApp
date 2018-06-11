@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ClinicsService } from '../../../service/clinics.service';
+import { ClinicsService } from '../service/clinics.service';
 
 @Component({
-  selector: 'app-clinics-menu',
-  templateUrl: './clinics-menu.component.html',
-  styleUrls: ['./clinics-menu.component.scss']
+  selector: 'app-side-menu',
+  templateUrl: './side-menu.component.html',
+  styleUrls: ['./side-menu.component.scss']
 })
-export class ClinicsMenuComponent implements OnInit {
+export class SideMenuComponent implements OnInit {
   public showdoctorselect: boolean = false;
   public doctors:any[];
   constructor(public clinicService: ClinicsService) { }

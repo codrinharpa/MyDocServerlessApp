@@ -11,5 +11,5 @@
     </ul>
 </div>
 <div *ngIf = "addPacientShown" class = "add-pacient-popup pop-over">
-    <app-create-pacient (hideMe) = "toggleAddPacient(false)"></app-create-pacient>
+    <app-create-pacient (hideMe) = "toggleAddPacient(false)" (newPacientCreated) = "addNewPacientCreated($event)"></app-create-pacient>
 </div>

@@ -17,6 +17,7 @@ export class CreatePacientModel {
 export class CreatePacientComponent implements OnInit {
 
     @Output() hideMe = new EventEmitter<any>();
+    @Output() newPacientCreated = new EventEmitter<any>();
     createPacientFormGroup:FormGroup;
     pacient:CreatePacientModel;
     public successMessage:string;
@@ -53,6 +54,7 @@ export class CreatePacientComponent implements OnInit {
         this.pacientService.createPacient(this.pacient).subscribe( (data:any) =>{
             if(data.message == 'Created'){
                 this.successMessage = "Pacientul a fost creeat cu succes";
+                this.newPacientCreated.emit(this.pacient);
             }
             else{
                 this.errorMessage = "Eroare. Verificati campurile";

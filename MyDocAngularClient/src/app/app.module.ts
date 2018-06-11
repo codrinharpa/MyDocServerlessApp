@@ -20,7 +20,7 @@ import { ConfirmRegistrationComponent } from './auth/confirm-registration/confir
 import { NewpasswordComponent } from './auth/newpassword/newpassword.component';
 import { ClinicsNavbarComponent } from './secure/clinics/clinics-navbar/clinics-navbar.component';
 import { AgmCoreModule,MapsAPILoader } from '@agm/core';
-import { } from '@types/googlemaps';
+import {} from 'google-maps';
 import { MapComponent } from './map/map.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
@@ -36,7 +36,7 @@ import { SchedulerComponent } from './scheduler/scheduler.component';
 import { UpdateComponent } from './auth/update/update.component'
 import { ImageUploadModule } from "angular2-image-upload"
 import { UtilsService } from './service/utils.service';
-import { ClinicsMenuComponent } from './secure/clinics/clinics-menu/clinics-menu.component';
+import { SideMenuComponent } from '././side-menu/side-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScrollToModule } from 'ng2-scroll-to-el';
 import * as jQuery from 'jquery';
@@ -45,6 +45,7 @@ import { CreatePacientComponent } from './pacients/create-pacient/create-pacient
 import { PacientSearchComponent } from './pacients/pacient-search/pacient-search.component';
 import { PacientsComponent } from './pacients/pacients.component';
 import { PacientsService } from './service/pacients.service';
+import { SettingsComponent } from './settings/settings.component';
 (window as any).jQuery = (window as any).$ = jQuery; // This is needed to resolve issue.
 
 @NgModule({
@@ -67,11 +68,12 @@ import { PacientsService } from './service/pacients.service';
     DoctorsNavbarComponent,
     ForgotPasswordComponent,
     UpdateComponent,
-    ClinicsMenuComponent,
+    SideMenuComponent,
     SchedulerComponent,
     CreatePacientComponent,
     PacientSearchComponent,
-    PacientsComponent
+    PacientsComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserAnimationsModule,

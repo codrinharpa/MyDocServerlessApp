@@ -1,0 +1,20 @@
+<div id="side-menu">
+  <ul class="nav">
+      <li class="side-nav-tooltip" (click)="toggleDoctorSelect()">
+        <a class = "fa fa-user-md" ><small>Doctor</small></a>
+      </li>
+      <li class="side-nav-tooltip">
+        <a [routerLink]="['appointments']" data-toggle="tab" class="fa fa-calendar"><small>Calendar</small></a>
+      </li>
+      <li class="side-nav-tooltip" title="" data-toggle="tooltip">
+        <a [routerLink]="['settings']" data-toggle="tab" class="fa fa-cog" id="side-nav-customers"><small>Setari</small></a>
+      </li>
+
+      <li class="side-nav-tooltip" title="" data-toggle="tooltip">
+        <a [routerLink]="['pacients']" data-toggle="tab" class="fa fa-address-book" id="side-nav-customers"><small>Pacienti</small></a>
+      </li>
+  </ul>
+</div>
+<div id="doctor-select" *ngIf="showdoctorselect">
+
+</div>

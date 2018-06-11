@@ -17,6 +17,7 @@ import { AboutComponent } from './about/about.component';
 import { PacientSearchComponent } from './pacients/pacient-search/pacient-search.component';
 import { PacientsComponent } from './pacients/pacients.component';
 import { CreatePacientComponent } from './pacients/create-pacient/create-pacient.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {path: "",redirectTo: "home",pathMatch: 'full'},
@@ -36,11 +37,12 @@ const routes: Routes = [
     path:"clinics",
     component: ClinicsHomeComponent,
     children: [
-      {path:"updateDetails",component: UpdateComponent},
-      {path:"createDoctor",component: RegisterDoctorComponent},
-      {path:"appointments",component: ClinicsAppointmentsComponent},
-      {path:"pacients",component: PacientsComponent},
-      {path:"pacients/createPacient",component: CreatePacientComponent}
+        {path:"settings",component: SettingsComponent},
+        {path:"updateDetails",component: UpdateComponent},
+        {path:"createDoctor",component: RegisterDoctorComponent},
+        {path:"appointments",component: ClinicsAppointmentsComponent},
+        {path:"pacients",component: PacientsComponent},
+        {path:"pacients/createPacient",component: CreatePacientComponent}
     ]
   },
   {
