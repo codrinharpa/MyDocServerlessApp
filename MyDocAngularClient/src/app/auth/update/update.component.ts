@@ -19,10 +19,12 @@ export class UpdateUser{
   styleUrls: ['./update.component.scss']
 })
 export class UpdateComponent{
-
+    latitude: number = 12.4;
+    longitude: number = 15.5;
     updateUser: UpdateUser;
     router: Router;
     errorMessage: string;
+    successMessage: string;
     updateFormGroup: FormGroup;
     
     constructor(public cognitoUtil:CognitoUtil,private formBuilder: FormBuilder,public userRegistration: UserRegistrationService, router: Router) {
@@ -33,8 +35,8 @@ export class UpdateComponent{
         this.updateUser = new UpdateUser();
         var update = this.updateUser;
         this.cognitoUtil.getCurrentUser().getSession(function(err,session){
-          update = session;
-          console.log(update)
+          update = session.getAccessToken()['payload'];
+        //   console.log(session.getIdToken());
         });
         this.errorMessage = null;
         this.updateFormGroup = this.formBuilder.group({
@@ -49,6 +51,10 @@ export class UpdateComponent{
         this.updateUser.latitude = event.latitude.toString();
         this.updateUser.longitude = event.longitude.toString();
         console.log(this.updateUser);
+    }
+
+    onLocationChange(event){
+
     }
 
     onUpdate() {
@@ -70,11 +76,13 @@ export class UpdateComponent{
 
     get name() { return this.updateFormGroup.get('name'); }
 
-    get email() { return this.updateFormGroup.get('email'); }
-
     get phone() { return this.updateFormGroup.get('phone');}
 
     get city() { return this.updateFormGroup.get('city');}
+
+    get practiceType() { return this.updateFormGroup.get('practiceType');}
+
+    get description() { return this.updateFormGroup.get('description');}
 
 
 

@@ -32,7 +32,6 @@ module.exports.handler = (event, context, callback) => {
     var params = {
         TableName: "Pacients",
         Key: {
-            clinicEmail: clinicEmail,
             phone: phone
         }
     }

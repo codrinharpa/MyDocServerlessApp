@@ -3,7 +3,6 @@ import { ClinicsService } from '../../service/clinics.service';
 import { UserLoginService } from '../../service/user-login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ClinicsHomeComponent } from '../../secure/clinics/clinics-home/clinics-home.component';
 import { UtilsService } from '../../service/utils.service';
 
 
@@ -30,7 +29,7 @@ export class RegisterDoctorComponent{
     registrationFormGroup: FormGroup;
     specializations: any;
     
-    constructor(public clinicsHome:ClinicsHomeComponent ,private formBuilder: FormBuilder,public clinicsService: ClinicsService,public utilsService: UtilsService, router: Router) {
+    constructor(private formBuilder: FormBuilder,public clinicsService: ClinicsService,public utilsService: UtilsService, router: Router) {
             this.router = router;
             this.onInit();
         }
@@ -53,8 +52,10 @@ export class RegisterDoctorComponent{
 
     onCreateDoctor() {
         this.errorMessage = null;
-        this.clinicsHome.setSuccessMessage('Successfully created');
+        this.successMessage = null;
+        console.log(this.registrationDoctor);
         this.clinicsService.createDoctor(this.registrationDoctor).subscribe( (data:any) =>{
+            console.log(data);
             if(data.message == 'Created'){
                 this.successMessage = 'Doctorul a fost creeat cu succes';
             }

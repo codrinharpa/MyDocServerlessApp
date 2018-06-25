@@ -11,6 +11,7 @@ export const environment = {
   clinicsServiceEndpoint: "https://oogo5xxxm6.execute-api.eu-central-1.amazonaws.com/dev/clinics",
   doctorsServiceEndpoint: "https://8yz2std66h.execute-api.eu-central-1.amazonaws.com/dev/clinics",
   pacientsServiceEndpoint: "https://7zk631wsnf.execute-api.eu-central-1.amazonaws.com/dev/pacients",
+  appointmentServiceEndpoint: "https://1lwatmdpha.execute-api.eu-central-1.amazonaws.com/dev/appointments",
   ddbTableName: 'LoginTrail',
 
   cognito_idp_endpoint: '',

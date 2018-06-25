@@ -20,6 +20,7 @@ provider:
         - dynamodb:GetItem
         - dynamodb:UpdateItem
         - dynamodb:Query
+        - dynamodb:BatchGetItem
       Resource: arn:aws:dynamodb:eu-central-1:225908385928:table/*
 functions:
   createPacient:

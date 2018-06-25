@@ -9,16 +9,29 @@ body {
     font-style: normal;
     font-weight: 100;
  }
+ a {
+    text-decoration: none;
+ }
  .btn-turc{
     background-color:#00cfca;
     color:white;
  }
+ .turc-color, .turc-color:hover{
+    color: #00cfca;
+    text-decoration: none;
+}
  .btn-turc:disabled{
     opacity: 0.6;
  }
- .turc-color{
-    color: #00cfca;
-}
+ .my-navbar-brand{
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+ }
 .round-button{
     border: 1px solid transparent;
     padding: 7px 10px;
@@ -88,6 +101,27 @@ body {
     line-height: 1.2;
     margin-top: 20px;
 } 
+.my-modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content{
+    padding:10px;
+    height: auto;
+    width: 480px;
+    left: 30%;
+    top: 30%;
+    position: fixed;
+}
+
+
 @media only screen and (max-width: 600px) {
     .header-grey-big{
         font-size:34px;
@@ -96,4 +130,3 @@ body {
         font-size:16px;
     }
 }
- @import "../node_modules/angular-calendar/css/angular-calendar.css";

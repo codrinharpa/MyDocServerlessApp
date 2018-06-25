@@ -8,26 +8,37 @@ import { CognitoUtil, Callback } from './cognito.service';
 import { UpdateUser } from '../auth/update/update.component';
 
 const endpoint = environment.clinicsServiceEndpoint;
-const httpOptions = {
-  headers: new HttpHeaders({ 
-    'Content-Type':'application/json'
-  })
-};
 @Injectable()
 export class ClinicsService {
     token: string;
+    httpOptions:any;
     constructor(public cognitoUtil:CognitoUtil,private httpClient: HttpClient) {
         let vm = this;
-        let currentUser = this.cognitoUtil.getCurrentUser();
-        if(currentUser){
-            currentUser.getSession(function(err,session){
-                if(err){
-                    console.log(err);
-                    vm.token = null;
-                    return;
-                }
-                vm.token = session.getIdToken().getJwtToken();
-            });
+        var currentUser = null;
+        var tryAgain = true;
+        while(tryAgain){
+            tryAgain = false;
+            currentUser = this.cognitoUtil.getCurrentUser();
+            console.log("in clinics service",currentUser)
+            if(currentUser) {
+                currentUser.getSession(function(err,session){
+                    if(err){
+                        console.log(err);
+                        vm.token = null;
+                        tryAgain = true;
+                        return;
+                    }
+                    vm.token = session.getIdToken().getJwtToken();
+                    vm.httpOptions = {
+                        headers: new HttpHeaders({
+                            'Content-Type':  'application/json',
+                            'Authorization': vm.token
+                        })
+                    };
+                    console.log('initialized clinics service');
+                    console.log(vm.httpOptions);
+                });
+            }
         }
     }
 
@@ -52,25 +63,13 @@ export class ClinicsService {
 
     createDoctor(doctor: RegistrationDoctor) {
         let body = JSON.stringify(doctor);
-        let route = '/createDoctor';
-        let httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type':  'application/json',
-                'Authorization': this.token
-            })
-        };
-        return this.httpClient.post(endpoint + route, body, httpOptions);
+        let route = '/createDoctor/';
+        return this.httpClient.post(endpoint + route, body, this.httpOptions);
     }
     getDoctors(){
         var route = "/getDoctors";
-        let client = this.httpClient;
-        let httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type':  'application/json',
-                'Authorization': this.token
-            })
-        };
-        return client.get(endpoint + route, httpOptions);
+        console.log('doctors',this.httpOptions);
+        return this.httpClient.get(endpoint + route, this.httpOptions);
     }
 
 }

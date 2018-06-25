@@ -1,0 +1,19 @@
+{
+  "name": "appointment-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "dependencies": {
+    "aws-sdk": "^2.254.1",
+    "es6-promise": "^4.2.4",
+    "joi": "^13.4.0",
+    "nexmo": "^2.3.0",
+    "random-token": "0.0.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

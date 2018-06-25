@@ -1,7 +1,8 @@
 <div id="side-menu">
   <ul class="nav">
-      <li class="side-nav-tooltip" (click)="toggleDoctorSelect()">
-        <a class = "fa fa-user-md" ><small>Doctor</small></a>
+      <li *ngIf = "isClinicFeature()" class="side-nav-tooltip" (click)="toggleDoctorSelect()">
+        <a *ngIf = "!activeDoctor" class = "fa fa-user-md" ><small>Doctor</small></a>
+        <a *ngIf = "activeDoctor" class = "fa fa-user-md" ><small>{{activeDoctor}}</small></a>
       </li>
       <li class="side-nav-tooltip">
         <a [routerLink]="['appointments']" data-toggle="tab" class="fa fa-calendar"><small>Calendar</small></a>
@@ -16,5 +17,9 @@
   </ul>
 </div>
 <div id="doctor-select" *ngIf="showdoctorselect">
-
+  <ul *ngIf = "doctorsNames" class>
+    <li *ngFor= "let doctorName of doctorsNames" (click)="onActivateDoctor(doctorName)">
+      <small>{{ doctorName }}</small>
+    </li>
+  </ul>
 </div>

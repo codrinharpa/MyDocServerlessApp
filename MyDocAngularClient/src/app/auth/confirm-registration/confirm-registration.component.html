@@ -1,34 +1,45 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light navbar-center fixed-top">
+        <a class="my-navbar-brand turc-color" href="#"><i class="fa fa-fw fa-user-md"></i>Doctorul Meu</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
 
+          </ul>
+          <ul class="navbar-nav navbar-right">
+        </ul>
+        </div>
+      
+</nav>
       
 <div *ngIf="showSuccessMessage" class = "alert alert-success">
         {{successMessage}}
 </div>
-<form class="confirm-registration-form" method="POST" action="#" role="form">
-  <div class="form-group">
-      <h2>Confirm Registration</h2>
-  </div>
+<form class="form-signin" method="POST" action="#" role="form">
+    <div class = "title-login">
+        <h1 class = "header-grey-medium">Confirma Inregistrarea</h1>
+    </div>
   <div *ngIf="errorMessage!=null" class="alert alert-danger">
       {{ errorMessage }}
   </div>
-  <div class="form-group" *ngIf="email===null">
-      <label class="control-label" for="confirmationCode">Email</label>
-      <input id="email" type="email" maxlength="50" class="form-control"
-             [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+  <div *ngIf="!mfaStep">
+      <div class="form-group">
+          <input id="signupEmail" required placeholder = "Cod de confirmare" type="email" maxlength="100" class="form-control" [(ngModel)]="confirmationCode"
+                 [ngModelOptions]="{standalone: true}">
+      </div>
+
+      <div class="form-group" style = " display: flex;align-items: center;justify-content: center;">
+          <button (click)="onConfirmRegistration()" id="signupSubmit" type="submit" class="btn btn-light">
+              Confirma
+          </button>
+      </div>
+
+      <hr>
+      <p>
+        <a [routerLink]="['/resendCode']" class = "turc-color"> <i class="fa fa-fw fa-key"></i> Retrimite codul de validare</a>
+      </p>
+
   </div>
-  <div class="form-group">
-      <label class="control-label" for="confirmationCode">Confirmation Code</label>
-      <input id="confirmationCode" type="text" maxlength="50" class="form-control"
-             [(ngModel)]="confirmationCode" [ngModelOptions]="{standalone: true}">
-  </div>
-  <div class="form-group">
-      <button (click)="onConfirmRegistration()" id="confirmRegistration" type="submit"
-              class="btn btn-info btn-block">Confirm
-      </button>
-  </div>
-  <hr>
-  <p>Can't find your code? <a [routerLink]="['/home/resendCode']"> <i class="fa fa-fw fa-group"></i> Resend
-      Code</a>
-      <a [routerLink]="['/register']"> <i class="fa fa-fw fa-group"></i> Register</a> <a
-              [routerLink]="['/login']"> <i class="fa fa-fw fa-user"></i> Login</a>
-  </p>
 </form>
+

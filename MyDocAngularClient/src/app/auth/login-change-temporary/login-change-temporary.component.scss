@@ -1,8 +1,13 @@
+.navbar{
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,.2)
+}
 .form-signin {
     max-width: 460px;
     padding: 15px;
     margin: 0 auto;
     background-color: white;
+    margin-top:65px;
 }
 
 .form-signin .form-control {
@@ -14,7 +19,51 @@
     padding: 10px;
     font-size: 16px;
 }
+input{
+    padding: 10px 0 8px;
+    background-color: #fff;
+    border: solid 1px #fff;
+    height: 20px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    position: relative;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: all .1s ease;
+    margin: 0;
+    width: 100%;
+    margin-bottom: 5px;
+
+}
 
 .form-signin .form-control:focus {
     z-index: 2;
+}
+
+#home-login {
+    border: 1px solid;
+    margin-right: 7px;
+    color: #fff!important;
+}
+#home-register{
+    background: #ff55a0;
+    color: #fff!important;
+}
+.header-grey-big{
+    font-weight: 100;
+    color: #555;
+    font-size: 3.25rem;
+    line-height: 1.2;
+    margin-top: 1em;
+}
+.header-grey-medium{
+    color: #555;
+    font-size: 1.70rem;
+    line-height: 1.2;
+    margin-top: 20px;
+}
+.title-login{
+    margin-bottom: 20px;
 }

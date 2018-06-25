@@ -20,13 +20,11 @@
       "prefix": "app",
       "styles": [
         "styles.scss",
-        "../node_modules/fullcalendar/dist/fullcalendar.min.css",
-        "..//node_modules/primeng/resources/themes/omega/theme.css",
-        "../node_modules/primeng/resources/primeng.min.css"
+        "../node_modules/angular-calendar-week-hours-view/angular-calendar-week-hours-view.scss",
+        "../node_modules/angular-calendar/css/angular-calendar.css"
       ],
       "scripts": [
-        "../node_modules/moment/min/moment.min.js",
-        "../node_modules/fullcalendar/dist/fullcalendar.min.js"
+
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

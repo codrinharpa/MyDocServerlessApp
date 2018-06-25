@@ -14,7 +14,9 @@ export class GroupBasedRedirect {
 
     }
     redirect(session: CognitoUserSession){
-        var groups = session.getAccessToken()['payload']['cognito:groups'];
+        var payload = session.getAccessToken()['payload']
+        var groups = payload['cognito:groups'];
+        console.log(payload);
         if( groups.includes('Clinics')){
             this.router.navigate(['/clinics']);
         }
@@ -28,7 +30,7 @@ export class GroupBasedRedirect {
 export class UserLoginService{
     loginDetails:NewPasswordUser;
 
-    private onLoginSuccess = (callback: CognitoCallback, session: CognitoUserSession) => {
+    private onLoginSuccess = (callback: CognitoCallback, session: CognitoUserSession, username) => {
 
         console.log("In authenticateUser onSuccess callback");
         AWS.config.credentials = this.cognitoUtil.buildCognitoCreds(session.getAccessToken().getJwtToken());
@@ -56,6 +58,7 @@ export class UserLoginService{
                 console.log(localStorage.getItem('clinicsDetails'));
             });
         console.log(session.getIdToken().getJwtToken());
+        localStorage.setItem('username',username);
         this.groupRedirect.redirect(session);
     }
 
@@ -97,12 +100,12 @@ export class UserLoginService{
                 this.router.navigate(['changeTemporary']);
                 callback.cognitoCallback('User needs to set password.', null)
             },
-            onSuccess: result => this.onLoginSuccess(callback, result),
+            onSuccess: result => this.onLoginSuccess(callback, result, authenticationData.Username),
             onFailure: err => this.onLoginError(callback, err),
             mfaRequired: (challengeName, challengeParameters) => {
                 callback.handleMFAStep(challengeName, challengeParameters, (confirmationCode: string) => {
                     cognitoUser.sendMFACode(confirmationCode, {
-                        onSuccess: result => this.onLoginSuccess(callback, result),
+                        onSuccess: result => this.onLoginSuccess(callback, result,authenticationData.Username),
                         onFailure: err => this.onLoginError(callback, err)
                     });
                 });

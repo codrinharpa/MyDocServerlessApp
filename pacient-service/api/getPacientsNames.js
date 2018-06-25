@@ -29,49 +29,53 @@ module.exports.handler = (event, context, callback) => {
     else if(groups.includes('Doctors')){
         clinicEmail = authorizer.claims.clinicEmail;
     }
-    var params = {
-        TableName: "Pacients",
-        KeyConditionExpression: "#clinicEmail = :clinicEmail",
-        ExpressionAttributeNames:{
-            "#clinicEmail": "clinicEmail"
+    docClient.get({
+        TableName : 'Clinics',
+        Key: {
+            email: clinicEmail,
         },
-        ExpressionAttributeValues: {
-            ":clinicEmail":clinicEmail
-        },
-        ProjectionExpression: "phone,firstname,surname",
-    }
-    docClient.query(params,function(err, data){
-        if(err){
-            console.log(err);
-            callback(null,{
-                statusCode: 500,
-                body: JSON.stringify({
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Credentials': true,
-                        'Access-Control-Allow-Headers': 'Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With',
-                        'Access-Control-Allow-Methods': 'GET, PUT, POST"'
-                    },
-                    message: "Unexpected error"
-                }),
-            });
-            return;
-        }
-        else{
+        AttributesToGet: ['pacientsPhones']
+    }).promise().then(function(data){
+        console.log(JSON.stringify(data));
+        var keysMap = data.Item.pacientsPhones.map(x => ({phone: x}));
+        console.log(keysMap);
+        var params = {
+            RequestItems: {
+                'Pacients': {
+                    Keys: keysMap
+                }
+            }
+        };
+        docClient.batchGet(params, function(err, data) {
+            if (err) {
+                console.log(err);
+                callback(null,{
+                    statusCode: 500,
+                    body: JSON.stringify({
+                        message:"Ups"
+                    }),
+                });
+                return;
+            }
             console.log(data);
             callback(null,{
                 statusCode: 200,
                 body: JSON.stringify({
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Credentials': true,
-                        'Access-Control-Allow-Headers': 'Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With',
-                        'Access-Control-Allow-Methods': 'GET, PUT, POST"'
-                    },
-                    pacients: data.Items
+                    pacients: data.Responses.Pacients
                 }),
             });
-        }
+
+          });
+
+    }).catch(function(err){
+        console.log(err);
+        callback(null,{
+            statusCode: 500,
+            body: JSON.stringify({
+                message:"Ups"
+            }),
+        });
+        return;
     });
 
   

@@ -1,22 +1,47 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light navbar-center fixed-top">
+        <a class="my-navbar-brand turc-color" href="#"><i class="fa fa-fw fa-user-md"></i>Doctorul Meu</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+
+          </ul>
+          <ul class="navbar-nav navbar-right">
+
+        </ul>
+        </div>
+      
+</nav>
+      
+<div *ngIf="showSuccessMessage" class = "alert alert-success">
+        {{successMessage}}
+</div>
 <form class="form-signin" method="POST" action="#" role="form">
-  <div class="form-group">
-      <h2>Login</h2>
-  </div>
+    <div class = "title-login">
+        <h1 class = "header-grey-medium">Schimare parola temporara</h1>
+    </div>
   <div *ngIf="errorMessage!=null" class="alert alert-danger">
       {{ errorMessage }}
   </div>
-  <div>
+  <div *ngIf="!mfaStep">
 
       <div class="form-group">
-          <label class="control-label" for="signupPassword">Password</label>
-          <input id="signupPassword" required type="password" maxlength="25" class="form-control"
+          <input id="signupPassword" placeholder = "Parola" required type="password" maxlength="25" class="form-control"
                  length="40" [(ngModel)]="registrationUser.password" [ngModelOptions]="{standalone: true}">
       </div>
+
       <div class="form-group">
-          <button (click)="onRegister()" id="signupSubmit" type="submit" class="btn btn-info btn-block">
-              Login
+            <input id="signupPassword" placeholder = "Confirmare parola" required type="password" maxlength="25" class="form-control"
+                   length="40" [(ngModel)]="passwordConfirmation" [ngModelOptions]="{standalone: true}">
+        </div>
+      <div class="form-group" style = " display: flex;align-items: center;justify-content: center;">
+          <button (click)="onRegister()" id="signupSubmit" type="submit" class="btn btn-light">
+              Schimba parola
           </button>
       </div>
+
+      <hr>
 
   </div>
 </form>

@@ -1,1 +1,88 @@
-<p-schedule [events]="events" [header]="header" [editable]="true"></p-schedule>
+
+<div id = "scheduler" *ngIf="calendarOptions">
+        <ng-fullcalendar #ucCalendar (eventDrop) = "onEventDrop($event)" [options]="calendarOptions" [(eventsModel)]="events" (select) = "onSelect($event)" (dayClick) = "onDayClick($event)" (eventClick) = "onEventClick($event)"></ng-fullcalendar>
+</div>
+<div *ngIf="createAppointmentVisible" class = "my-modal">
+        <div class = "modal-content">
+                <div class = "form-group">
+                        <h3 style="background-color: #f8f8f8;font-size: 15px;padding: 8px 14px;">Creeaza programare</h3>
+                </div>
+                <div *ngIf="successMessage" class = "alert alert-success" style="height: 40px;">
+                        <h3 style="font-size: 15px;">{{successMessage}}</h3>
+                </div>
+                <div *ngIf="errorMessage" class = "alert alert-danger">
+                        <h3 style="font-size: 15px;">{{errorMessage}}</h3>
+                </div>
+                <div class = "form-group">
+                        <input class="form-control" type="date" placeholder="Data" [(ngModel)]="appointment.appointmentDate">
+                </div>
+                <div class = "form-group form-inline">
+                        <span id = "start-label">Inceput</span>
+                        <input class="form-control time-input" type="time" placeholder="Ora start" [(ngModel)]="appointment.appointmentStart">
+                        <span id = "end-label">Sfarsit</span>
+                        <input class="form-control time-input" type="time" placeholder="Ora sfarsit" [(ngModel)]="appointment.appointmentEnd">
+                </div>
+                <div class = "form-group">
+                        <input class="form-control" type="text" placeholder="Telefon pacient" [(ngModel)]="appointment.pacientPhone">
+                </div>
+                <textarea class="form-control" rows = "3" placeholder="Detalii" [(ngModel)]="appointment.details"></textarea>
+                <div class = "form-group">
+                        <button class="round-corners-button btn-turc" (click) = "onCreateAppointment()">Creeaza programare</button>
+                        <button class="round-corners-button" (click) = "onCancelAppointment()" >Anulare</button>
+                </div>
+        </div>
+        
+</div>
+<div *ngIf="appointmentDetailsVisible" class = "my-modal">
+        <div class = "modal-content">
+                <div class = "form-group">
+                        <h3 style="background-color: #f8f8f8;font-size: 15px;padding: 8px 14px;">{{appointmentDetails.title}}</h3>
+                
+                </div>
+                <div *ngIf="deleteAppointmentSuccessMessage" class = "alert alert-success" style="height: 40px;">
+                                <h3 style="font-size: 15px;">{{deleteAppointmentSuccessMessage}}</h3>
+                        </div>
+                <div class = "form-group">
+                        <input readonly class="form-control" type="date" placeholder="Data" [(ngModel)]="appointmentDetails.appointmentDate">
+                </div>
+                <div class = "form-group form-inline">
+                        <span id = "start-label">Inceput</span>
+                        <input readonly class="form-control time-input" type="time" placeholder="Ora start" [(ngModel)]="appointmentDetails.appointmentStart">
+                        <span id = "end-label">Sfarsit</span>
+                        <input readonly class="form-control time-input" type="time" placeholder="Ora sfarsit" [(ngModel)]="appointmentDetails.appointmentEnd">
+                </div>
+                <div class = "form-group">
+                        <input readonly class="form-control" type="text" placeholder="Telefon pacient" [(ngModel)]="appointmentDetails.pacientPhone">
+                </div>
+                <textarea readonly class="form-control" rows = "3" placeholder="Detalii" [(ngModel)]="appointmentDetails.details"></textarea>
+                <div class = "form-group">
+                        <button class="round-corners-button" (click) = "onCancelAppointmentDetails()" >Inchide</button>
+                        <button class="round-corners-button btn-danger" (click) = "onDeleteAppointment()">Anuleaza programare</button>
+                </div>
+        </div>
+</div>
+<div *ngIf="updateAppointmentVisible" class = "my-modal">
+        <div class = "modal-content">
+                <div class = "form-group">
+                        <h3 style="background-color: #f8f8f8;font-size: 15px;padding: 8px 14px;">Reprogramare</h3>
+                
+                </div>
+                <!-- <div *ngIf="deleteAppointmentSuccessMessage" class = "alert alert-success" style="height: 40px;">
+                                <h3 style="font-size: 15px;">{{deleteAppointmentSuccessMessage}}</h3>
+                </div> -->
+                <div class = "form-group">
+                        <input readonly class="form-control" type="date" placeholder="Data" [(ngModel)]="updateAppointment.newAppointmentDate">
+                </div>
+                <div class = "form-group form-inline">
+                        <span id = "start-label">Inceput</span>
+                        <input class="form-control time-input" type="time" placeholder="Ora start" [(ngModel)]="updateAppointment.newAppointmentStart">
+                        <span id = "end-label">Sfarsit</span>
+                        <input class="form-control time-input" type="time" placeholder="Ora sfarsit" [(ngModel)]="updateAppointment.newAppointmentEnd">
+                </div>
+        
+                <div class = "form-group">
+                        <button class="round-corners-button" (click) = "onCancelUpdateAppointment()" >Inchide</button>
+                        <button class="round-corners-button btn-turc" (click) = "onUpdateAppointment()">Reprogrameaza</button>
+                </div>
+        </div>
+</div>

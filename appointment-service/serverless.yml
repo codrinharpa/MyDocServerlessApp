@@ -1,0 +1,70 @@
+service: appointment-service
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: eu-central-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:BatchGetItem
+        - dynamodb:DeleteItem
+        - dynamodb:Query
+      Resource: arn:aws:dynamodb:eu-central-1:225908385928:table/*
+
+functions:
+  createAppointment:
+    handler: api/createAppointment.handler
+    memorySize: 256
+    description: Creates an appointment
+    events:
+      - http: 
+          path: appointments/create
+          method: post
+          cors: true
+  updateAppointment:
+    handler: api/updateAppointment.handler
+    memorySize: 256
+    description: Updates an appointment
+    events:
+      - http: 
+          path: appointments/update
+          method: post
+          cors: true
+  deleteAppointment:
+    handler: api/deleteAppointment.handler
+    memorySize: 256
+    description: Deletes an appointment
+    events:
+      - http: 
+          path: appointments/delete
+          method: post
+          cors: true
+  getAppointmentsForPacient:
+    handler: api/getPacientAppointments.handler
+    memorySize: 256
+    description: Gets the appointments for a pacient
+    events:
+      - http: 
+          path: appointments/getPacientAppointments/{phone}
+          method: get
+          cors: true
+  getAppointmentsInRange:
+    handler: api/getAppointmentsInRange.handler
+    memorySize: 256
+    description: Gets the appointments for a doctor in the specified range
+    events:
+      - http: 
+          path: appointments/getAppointmentsInRange
+          method: get
+          request:
+            parameters:
+              querystrings:
+                doctorEmail: true
+                start: true
+                end: true
+          cors: true

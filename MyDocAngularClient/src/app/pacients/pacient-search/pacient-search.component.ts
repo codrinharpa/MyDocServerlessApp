@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { PacientsService } from '../../service/pacients.service';
 import { CognitoUtil } from '../../service/cognito.service';
+import { AppointmentService } from '../../service/appointment.service';
 
 @Component({
   selector: 'app-pacient-search',
@@ -12,26 +13,16 @@ export class PacientSearchComponent implements OnInit {
   public pacients = [];
   public searchResults = []; 
   @Output() pacientDetails = new EventEmitter<any>();
-  constructor(public cognitoUtil: CognitoUtil,public pacientService: PacientsService) {}
+  constructor(public cognitoUtil: CognitoUtil,public pacientService: PacientsService, public appointmentService: AppointmentService) {}
 
     ngOnInit() {
-        var localStoragePacients = localStorage.getItem('pacients');
-        console.log(localStoragePacients);
-        if(!localStoragePacients){
-            console.log(this.pacients.length);
-            this.pacientService.getPacientsNames()
-                .subscribe( (data) => {
-                    this.pacients = data['pacients'];
-                    this.searchResults = this.pacients;
-                    localStorage.setItem('pacients', JSON.stringify(this.pacients));
-                    this.viewPacient(this.searchResults[0].phone);
-                });
-        }
-        else{
-            this.pacients = JSON.parse(localStorage.getItem('pacients'));
-            this.searchResults = this.pacients;
-            this.viewPacient(this.pacients[0].phone);
-        }
+        this.pacientService.getPacientsNames()
+            .subscribe( (data) => {
+                this.pacients = data['pacients'];
+                console.log(this.pacients);
+                this.searchResults = this.pacients;
+                this.viewPacient(this.searchResults[0].phone);
+            });
     }
   toggleAddPacient(isShown){
     this.addPacientShown = isShown;
@@ -76,6 +67,10 @@ export class PacientSearchComponent implements OnInit {
     this.pacientService.getPacient(value)
         .subscribe( (data) => {
             this.pacientDetails.emit(data['pacient']);
+        });
+    this.appointmentService.getPacientAppointments(value)
+        .subscribe( (data) => {
+            console.log(data);
         });
   }
 

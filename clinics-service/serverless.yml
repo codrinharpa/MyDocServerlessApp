@@ -32,6 +32,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:GetItem
         - dynamodb:UpdateItem
+        - dynamodb:BatchGetItem
       Resource: arn:aws:dynamodb:eu-central-1:225908385928:table/*
 functions:
   #auth
@@ -97,7 +98,7 @@ functions:
           method: post
           cors: true
   getDoctors:
-    handler: api/getDoctorsWithPhotos.handler
+    handler: api/getDoctors.handler
     memorySize: 128
     description: Gets the doctors for a clinic including their photos
     events:
