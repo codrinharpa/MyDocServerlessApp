@@ -7,7 +7,6 @@ import { ConfirmRegistrationComponent} from './auth/confirm-registration/confirm
 import { HomeComponent} from './home/home.component'
 import { SecureHomeComponent } from './secure/secure-home/secure-home.component';
 import { LogoutComponent } from './auth/logout/logout.component';
-import { SecureAppointmentsComponent } from './secure/secure-appointments/secure-appointments.component';
 import { NewPasswordUser, NewpasswordComponent } from './auth/newpassword/newpassword.component';
 import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/login-change-temporary.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
@@ -19,6 +18,7 @@ import { CreatePacientComponent } from './pacients/create-pacient/create-pacient
 import { SettingsComponent } from './settings/settings.component';
 import { ClinicsHomeComponent } from './secure/clinics-home/clinics-home.component';
 import { DoctorsHomeComponent } from './secure/doctors-home/doctors-home.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
 
 const routes: Routes = [
   {path: "",redirectTo: "home",pathMatch: 'full'},
@@ -41,7 +41,7 @@ const routes: Routes = [
         {path:"settings",component: SettingsComponent},
         {path:"updateClinic",component: UpdateComponent},
         {path:"createDoctor",component: RegisterDoctorComponent},
-        {path:"appointments",component: SecureAppointmentsComponent},
+        {path:"appointments",component: SchedulerComponent},
         {path:"pacients",component: PacientsComponent},
         {path:"pacients/createPacient",component: CreatePacientComponent}
     ]
@@ -51,7 +51,7 @@ const routes: Routes = [
     component: DoctorsHomeComponent,
     children: [
         {path:"updateClinic",component: UpdateComponent},
-        {path:"appointments",component: SecureAppointmentsComponent},
+        {path:"appointments",component: SchedulerComponent},
         {path:"pacients",component: PacientsComponent},
         {path:"pacients/createPacient",component: CreatePacientComponent}
     ]

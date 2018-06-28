@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class SecureHomeComponent implements OnInit,LoggedInCallback {
   public showSuccessMessage:Boolean;
   public successMessage:String;
+  @ViewChild('scheduler') scheduler;
   @Input() feature:String;
   public doctorEmail:String;
   constructor(public userService:UserLoginService,public router:Router) { 
@@ -27,6 +28,8 @@ export class SecureHomeComponent implements OnInit,LoggedInCallback {
   }
   onChangedActiveDoctor(event){
     this.doctorEmail = event;
+    console.log(this.scheduler);
+    
   }
 
   ngOnInit() {

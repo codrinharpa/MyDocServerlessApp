@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { duration, isMoment, Moment } from 'moment';
 import { AppointmentService } from '../service/appointment.service';
+import { ClinicsService } from '../service/clinics.service';
 var moment = require('moment');
 @Component({
   selector: 'app-scheduler',
@@ -24,11 +25,25 @@ export class SchedulerComponent implements OnInit {
   public updateAppointmentVisible:boolean = false;
   public events;
   public appointments;
-  constructor(public appointmentService:AppointmentService) {
+  public doctors:any[];
+  public doctorsNames:any;
+  public doctorsNamesToEmails:any;
+
+  constructor(public clinicService:ClinicsService,public appointmentService:AppointmentService) {
+    this.doctorsNamesToEmails = {};
     this.appointment = {};
     this.appointmentDetails = {};
     this.doctorEmail = localStorage.getItem('doctorEmail');
     this.appointment.doctorEmail = this.doctorEmail;
+    this.clinicService.getDoctors().subscribe( (data:any) =>{
+      let mapping = {};
+      data.doctors.forEach(function(doctor) {
+        mapping[doctor['firstname'] + ' ' + doctor['surname'] ] = doctor.email;
+      });
+      this.doctorsNamesToEmails = mapping;
+      this.doctorsNames = data.doctors.map(doctor => doctor.firstname + ' ' + doctor.surname);
+
+  });
   }
   ngOnInit() {
      this.calendarOptions = {
@@ -67,7 +82,7 @@ export class SchedulerComponent implements OnInit {
     return (date + 'T' + time);
   }
   loadEvents() {
-    let doctorEmail = localStorage.getItem('doctorEmail');
+    let doctorEmail = this.doctorEmail;
     this.appointmentService.getAppointmentsInRange(doctorEmail,"2015-01-01","2020-01-01").subscribe( (data:any) => {
       let events = [];
       this.appointments = data.appointments;
@@ -114,7 +129,7 @@ export class SchedulerComponent implements OnInit {
   }
   onCreateAppointment(){
     console.log(this.appointment);
-    this.appointment.doctorEmail = localStorage.getItem('doctorEmail');
+    this.appointment.doctorEmail = this.doctorEmail;
     this.appointmentService.createAppointment(this.appointment).subscribe( (data:any) =>{
       if(data.message == 'Created'){
           this.successMessage = "Programarea a fost creeat cu succes";
@@ -130,7 +145,7 @@ export class SchedulerComponent implements OnInit {
   }
   onDeleteAppointment(){
     this.appointmentService.deleteAppointment({
-      doctorEmail: localStorage.getItem('doctorEmail'),
+      doctorEmail: this.doctorEmail,
       pacientPhone: this.appointmentDetails.pacientPhone,
       timestamp: this.appointmentDetails.timestamp
     }).subscribe( (data:any) => {
@@ -154,12 +169,11 @@ export class SchedulerComponent implements OnInit {
   onEventDrop(event){
     console.log(event);
     let view = this.ucCalendar.fullCalendar('getView');
-    console.log(view.name);
     if (view.name !== 'month') {
       console.log('da');
       this.updateAppointment = {
         timestamp: event.detail.event.timestamp,
-        doctorEmail: localStorage.getItem('doctorEmail'),
+        doctorEmail: this.doctorEmail,
         pacientPhone: event.detail.event.pacientPhone,
         newAppointmentDate: event.detail.event.start.format('YYYY-MM-DD'),
         newAppointmentStart: event.detail.event.start.format("HH:mm"),
@@ -169,7 +183,7 @@ export class SchedulerComponent implements OnInit {
     } else {
       this.updateAppointment = {
         timestamp: event.detail.event.timestamp,
-        doctorEmail: localStorage.getItem('doctorEmail'),
+        doctorEmail: this.doctorEmail,
         pacientPhone: event.detail.event.pacientPhone,
         newAppointmentDate: event.detail.event.start.format('YYYY-MM-DD'),
       }
@@ -179,9 +193,13 @@ export class SchedulerComponent implements OnInit {
 
   onUpdateAppointment(){
     this.appointmentService.updateAppointment(this.updateAppointment).subscribe( (data:any) => {
-      console.log(data);
       this.loadEvents();
       this.updateAppointmentVisible = false;
     });
+  }
+  onActivateDoctor(doctorName){
+    console.log('activate',this.doctorEmail);
+    this.doctorEmail = this.doctorsNamesToEmails[doctorName];
+    this.loadEvents();
   }
 }

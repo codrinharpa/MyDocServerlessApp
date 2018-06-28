@@ -25,7 +25,6 @@ import { MapComponent } from './map/map.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
-import { SecureAppointmentsComponent } from './secure/secure-appointments/secure-appointments.component';
 import { RegisterDoctorComponent } from './auth/register-doctor/register-doctor.component';
 import { ClinicsService } from './service/clinics.service';
 import { LoginChangeTemporaryComponent } from './auth/login-change-temporary/login-change-temporary.component';
@@ -63,7 +62,6 @@ import { DoctorsHomeComponent } from './secure/doctors-home/doctors-home.compone
     SecureHomeComponent,
     LoginComponent,
     LogoutComponent,
-    SecureAppointmentsComponent,
     RegisterDoctorComponent,
     LoginChangeTemporaryComponent,
     ForgotPasswordComponent,

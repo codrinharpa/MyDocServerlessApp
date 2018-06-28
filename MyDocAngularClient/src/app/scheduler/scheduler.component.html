@@ -1,4 +1,11 @@
 
+<div id="doctor-select">
+        <ul *ngIf = "doctorsNames" class>
+          <li *ngFor= "let doctorName of doctorsNames" (click)="onActivateDoctor(doctorName)">
+            <small>{{ doctorName }}</small>
+          </li>
+        </ul>
+      </div>
 <div id = "scheduler" *ngIf="calendarOptions">
         <ng-fullcalendar #ucCalendar (eventDrop) = "onEventDrop($event)" [options]="calendarOptions" [(eventsModel)]="events" (select) = "onSelect($event)" (dayClick) = "onDayClick($event)" (eventClick) = "onEventClick($event)"></ng-fullcalendar>
 </div>

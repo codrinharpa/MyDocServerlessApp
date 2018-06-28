@@ -16,7 +16,6 @@ export class GroupBasedRedirect {
     redirect(session: CognitoUserSession){
         var payload = session.getAccessToken()['payload']
         var groups = payload['cognito:groups'];
-        console.log(payload);
         if( groups.includes('Clinics')){
             this.router.navigate(['/clinics']);
         }
