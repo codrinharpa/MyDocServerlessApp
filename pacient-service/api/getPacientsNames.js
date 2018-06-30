@@ -1,6 +1,6 @@
 'use strict';
 const AWS = require('aws-sdk');
-
+const config = require('config');
 AWS.config.update({
     region: "eu-central-1",
     endpoint: "https://dynamodb.eu-central-1.amazonaws.com"
@@ -27,7 +27,7 @@ module.exports.handler = (event, context, callback) => {
         clinicEmail = authorizer.claims.email;
     }
     else if(groups.includes('Doctors')){
-        clinicEmail = authorizer.claims.clinicEmail;
+        clinicEmail = config.authorizer.claims.clinicEmail;
     }
     docClient.get({
         TableName : 'Clinics',

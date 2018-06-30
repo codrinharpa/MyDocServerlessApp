@@ -1,6 +1,11 @@
 {
-"pacientPoolConfig":{
-    "UserPoolId": "eu-central-1_7SOv69fZK",
-    "ClientId": "2p5cv1n0o676e6rqjt0bc7gfhi"
+    "pacientPoolConfig":{
+        "UserPoolId": "eu-central-1_7SOv69fZK",
+        "ClientId": "2p5cv1n0o676e6rqjt0bc7gfhi"
+        },
+    "authorizer":{
+        "claims":{
+            "clinicEmail": "lemydoc@gmail.com"
+        }
     }
 }

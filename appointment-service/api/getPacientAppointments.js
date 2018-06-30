@@ -27,11 +27,14 @@ module.exports.handler = (event,contex,callback) =>{
     }).promise().then(function(data){
         console.log(JSON.stringify(data));
         var batchGetItems = [];
-        // for(var i = 0; i < data.length; i++){
-        //     batchGetItems.push({
-                
-        //     });
-        // }
+        if(!data.Item.appointments) {
+            callback(null,{
+                statusCode: 200,
+                body: JSON.stringify({
+                    appointments: []
+                }),
+            });
+        }
         var params = {
             RequestItems: {
                 'Appointments': {

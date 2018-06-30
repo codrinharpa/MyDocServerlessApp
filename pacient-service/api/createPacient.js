@@ -1,6 +1,7 @@
 'use strict';
 const Joi = require('joi');
 const AWS = require('aws-sdk');
+const config = require('config');
 const createPacientSchema = Joi.object().keys({
   email: Joi.string().email().allow(''),
   phone: Joi.string().regex(/^[0-9]{10}$/).required(),
@@ -36,8 +37,9 @@ module.exports.handler = (event, context, callback) => {
         clinicEmail = authorizer.claims.email;
     }
     else if(groups.includes('Doctors')){
-        clinicEmail = authorizer.claims.clinicEmail;
+        clinicEmail = config.authorizer.claims.clinicEmail;
     }
+    console.log(authorizer.claims);
 
     Joi.validate(pacient,createPacientSchema,function(err,value){
         if(err){
